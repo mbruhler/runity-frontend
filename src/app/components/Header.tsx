@@ -14,6 +14,8 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [animationKey, setAnimationKey] = useState(0);
+  const [isLanguageChanging, setIsLanguageChanging] = useState(false);
 
   useEffect(() => {
     // Trigger initial animation
@@ -91,8 +93,27 @@ export function Header() {
     }
   };
 
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const { scrollToSection } = useSmoothScroll();
+
+  // Re-trigger animation when language changes
+  useEffect(() => {
+    setIsLanguageChanging(true);
+    
+    // Quick fade out
+    const fadeOutTimer = setTimeout(() => {
+      setAnimationKey(prev => prev + 1);
+      
+      // Quick fade in after content updates
+      const fadeInTimer = setTimeout(() => {
+        setIsLanguageChanging(false);
+      }, 50);
+      
+      return () => clearTimeout(fadeInTimer);
+    }, 100);
+    
+    return () => clearTimeout(fadeOutTimer);
+  }, [language]);
 
   const navItems = [
     { name: t("navigation.home") as string, href: "/", sectionId: "home" },
@@ -172,16 +193,19 @@ export function Header() {
             <div className="hidden md:flex items-center">
               {navItems.map((item, index) => (
                 <Link
-                  key={item.name}
+                  key={`${animationKey}-${item.sectionId}`}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={`relative px-4 py-2 text-sm font-mono transition-all duration-300 group ${
                     isNavItemActive(item)
                       ? "text-amber-400"
                       : "text-gray-300 hover:text-white"
-                  }`}
+                  } ${isLanguageChanging ? 'transition-opacity duration-100' : ''}`}
                   style={{
-                    animation: isVisible ? `fadeInDown 0.5s ease-out ${index * 0.1 + 0.3}s both` : "",
+                    animation: isVisible && !isLanguageChanging
+                      ? `fadeInDown 0.5s ease-out ${index * 0.1 + 0.3}s both` 
+                      : "",
+                    opacity: isLanguageChanging ? 0 : 1,
                   }}
                 >
                   <span className="relative z-10">{item.name}</span>
@@ -275,7 +299,7 @@ export function Header() {
             <div className="space-y-2">
               {navItems.map((item, index) => (
                 <Link
-                  key={item.name}
+                  key={`${animationKey}-${item.sectionId}-${language}`}
                   href={item.href}
                   onClick={(e) => {
                     handleNavClick(e, item.href);
@@ -342,6 +366,17 @@ export function Header() {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+        
+        @keyframes fadeOutUp {
+          from {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateY(-10px);
           }
         }
         
