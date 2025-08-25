@@ -86,7 +86,7 @@ export function BlogSection() {
             whileInView="whileInView"
             viewport={{ once: true, amount: 0.3 }}
           >
-            {blogPosts.map((post, index) => (
+            {blogPosts.map((post) => (
               <motion.div
                 key={post.slug}
                 variants={fadeInUp}

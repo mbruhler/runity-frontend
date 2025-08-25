@@ -12,7 +12,6 @@ import {
   Clock, 
   Users, 
   Code2, 
-  Target, 
   Lightbulb, 
   TrendingUp,
   CheckCircle,
@@ -144,7 +143,7 @@ export default function ProjectPage() {
                 transition={{ duration: 0.6 }}
                 className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
               >
-                {Object.entries(project.stats).map(([key, value], index) => (
+                {Object.entries(project.stats).map(([key, value]) => (
                   <div
                     key={key}
                     className="bg-white rounded-xl p-6 text-center shadow-lg border border-gray-100"

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
@@ -11,10 +11,10 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, Clock, User, Share2 } from "lucide-react";
 import { Header } from "../../components/Header";
 import { getBlogPost, BlogPost } from "@/lib/blog";
+import { Footer } from "@/app/components/Footer";
 
 export default function BlogPostPage() {
   const params = useParams();
-  const router = useRouter();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -76,7 +76,7 @@ export default function BlogPostPage() {
               Blog Post Not Found
             </h1>
             <p className="text-lg font-mono text-gray-600 mb-8">
-              The blog post you're looking for doesn't exist or has been moved.
+              The blog post you&apos;re looking for doesn&apos;t exist or has been moved.
             </p>
             <Link href="/blog">
               <Button className="bg-amber-500 hover:bg-amber-600 text-white font-mono">
@@ -296,26 +296,7 @@ export default function BlogPostPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-gray-900 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center space-y-4">
-            <div className="text-gray-400 font-mono text-center">
-              © 2024 Runity. Building intelligent automation for tomorrow's businesses.
-            </div>
-            <div className="flex gap-6 text-sm font-mono">
-              <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">
-                Blog
-              </Link>
-              <Link href="/#contact" className="text-gray-400 hover:text-white transition-colors">
-                Contact
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

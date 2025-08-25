@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Calendar, Clock, Users, Code2, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, Users, ArrowRight } from 'lucide-react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getProjects, type Project } from '@/lib/projects';
 import { Header } from '../components/Header';

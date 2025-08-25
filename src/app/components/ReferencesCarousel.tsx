@@ -41,10 +41,6 @@ export function ReferencesCarousel() {
   const bgScale = useTransform(smoothProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
   const bgOpacity = useTransform(smoothProgress, [0, 0.5, 1], [0.3, 0.1, 0.3]);
   
-  // Title parallax
-  const titleY = useTransform(smoothProgress, [0, 1], [30, -30]);
-  const titleScale = useTransform(smoothProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
-  
   return (
     <section ref={sectionRef} className="relative py-20 overflow-hidden bg-gray-50 w-full">
       {/* Parallax background gradient */}

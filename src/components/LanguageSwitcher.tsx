@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Globe, Check } from 'lucide-react';
 import { useTranslation } from '@/contexts/LanguageContext';
-import type { Language } from '@/lib/i18n';
 
 export function LanguageSwitcher() {
   const { language, changeLanguage, languageNames, languages, isLoading } = useTranslation();

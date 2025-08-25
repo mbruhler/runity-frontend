@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "@/contexts/LanguageContext";
 
 // Animation variants for counter
@@ -378,11 +378,11 @@ export function TrustSection() {
             }}
           >
             <p className="text-lg font-mono text-gray-700 leading-relaxed">
-              <span className="text-amber-600 font-semibold">"{t("trust.testimonialQuote")}</span> 
+              <span className="text-amber-600 font-semibold">&ldquo;{t("trust.testimonialQuote")}</span> 
               {" "}{t("trust.testimonialText")}
             </p>
             <div className="text-lg font-mono text-gray-700 leading-relaxed ">
-              {t("trust.testimonialSubtext")}"
+              {t("trust.testimonialSubtext")}&rdquo;
             </div>
           </motion.div>
         </motion.div>

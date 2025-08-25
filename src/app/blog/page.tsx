@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { BookOpen, ArrowRight, Calendar, Clock } from "lucide-react";
 import { Header } from "../components/Header";
 import { getBlogPosts, BlogPost } from "@/lib/blog";

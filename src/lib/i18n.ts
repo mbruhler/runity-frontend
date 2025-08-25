@@ -25,17 +25,17 @@ export function getTranslation(
   path: string
 ): string | string[] {
   const keys = path.split('.');
-  let current: any = translations;
+  let current: unknown = translations;
   
   for (const key of keys) {
     if (current && typeof current === 'object' && key in current) {
-      current = current[key];
+      current = (current as Record<string, unknown>)[key];
     } else {
       return path; // Return the path if translation not found
     }
   }
   
-  return current;
+  return typeof current === 'string' || Array.isArray(current) ? current : path;
 }
 
 // Detect user's preferred language from browser
