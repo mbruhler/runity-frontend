@@ -214,6 +214,9 @@
         "highlights": ["Pełna dokumentacja", "Szkolenie zespołu", "Ciągłe wsparcie"]
       }
     },
+    "hoverForDetails": "Najedź kursorem po szczegóły",
+    "tapForDetails": "Kliknij po szczegóły",
+    "keyPoints": "Kluczowe punkty:",
     "ctaText": "Gotowy przekształcić swój biznes dzięki AI?",
     "ctaButton": "Rozpocznij Swoją Podróż Już Dziś"
   },

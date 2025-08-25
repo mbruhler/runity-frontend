@@ -214,6 +214,9 @@
         "highlights": ["Full documentation", "Team training", "Ongoing support"]
       }
     },
+    "hoverForDetails": "Hover for details",
+    "tapForDetails": "Tap to see details",
+    "keyPoints": "Key Points:",
     "ctaText": "Ready to transform your business with AI?",
     "ctaButton": "Start Your Journey Today"
   },

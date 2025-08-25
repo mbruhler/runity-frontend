@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { 
   MessageCircle, 
   Search, 
@@ -8,11 +9,22 @@ import {
   FileText, 
   Wrench, 
   Trophy,
-  CheckCircle
+  CheckCircle,
+  Info,
+  ChevronDown
 } from "lucide-react";
 import { useTranslation } from "@/contexts/LanguageContext";
-import { Card } from "@/components/ui/card";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
+import { 
+  HoverCard, 
+  HoverCardContent, 
+  HoverCardTrigger 
+} from "@/components/ui/hover-card";
+import { 
+  Tooltip,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
 
 // Icon mapping for steps with colors (soft pastel palette)
 const stepIcons = [
@@ -53,6 +65,7 @@ const staggerContainer = {
 export function HowWeWorkSection() {
   const { t, tArray } = useTranslation();
   const { scrollToSection } = useSmoothScroll();
+  const [expandedMobileStep, setExpandedMobileStep] = useState<number | null>(null);
 
   // Get steps from translations
   const steps = [1, 2, 3, 4, 5, 6].map((num, index) => ({
@@ -105,42 +118,76 @@ export function HowWeWorkSection() {
                   className="relative"
                   variants={fadeInUp}
                 >
-                  {/* Icon Circle */}
-                  <div
-                    className="relative z-10 flex items-center justify-center w-32 h-32 mx-auto mb-6"
-                  >
-                    <div className="absolute inset-0 bg-amber-500 rounded-full opacity-20" />
-                    <div className={`relative bg-gradient-to-br ${step.gradient} rounded-full p-6 shadow-lg`}>
-                      <Icon className="w-12 h-12 text-white" />
-                    </div>
-                    {/* Step Number */}
-                    <span className="absolute -bottom-2 -right-2 text-2xl font-sans font-bold text-amber-600 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md">
-                      {index + 1}
-                    </span>
-                  </div>
-
-                  {/* Content */}
-                  <div className="text-center">
-                    <h3 className="text-lg font-sans font-bold text-gray-900 mb-2">
-                      {step.title}
-                    </h3>
-                    <Card className="font-mono text-xs text-gray-600 mb-3 p-4">
-                      {step.description}
-                    </Card>
-                    
-                    {/* Highlights - Only show first 2 */}
-                    <div className="flex flex-col gap-1 items-center">
-                      {step.highlights.slice(0, 2).map((highlight, idx) => (
+                  <HoverCard openDelay={200} closeDelay={100}>
+                    <HoverCardTrigger asChild>
+                      <div className="cursor-pointer group">
+                        {/* Icon Circle */}
                         <div
-                          key={idx}
-                          className="inline-flex items-center gap-1 text-xs text-amber-700"
+                          className="relative z-10 flex items-center justify-center w-32 h-32 mx-auto mb-6 transition-transform duration-300 group-hover:scale-110"
                         >
-                          <CheckCircle className="w-3 h-3" />
-                          <span className="font-mono">{highlight}</span>
+                          <div className="absolute inset-0 bg-amber-500 rounded-full opacity-20 group-hover:opacity-30 transition-opacity" />
+                          <div className={`relative bg-gradient-to-br ${step.gradient} rounded-full p-6 shadow-lg group-hover:shadow-xl transition-shadow`}>
+                            <Icon className="w-12 h-12 text-white" />
+                          </div>
+                          {/* Step Number */}
+                          <span className="absolute -bottom-2 -right-2 text-2xl font-sans font-bold text-amber-600 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md">
+                            {index + 1}
+                          </span>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+
+                        {/* Content - Title only by default */}
+                        <div className="text-center">
+                          <h3 className="text-lg font-sans font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
+                            {step.title}
+                          </h3>
+                          
+                          {/* Visual indicator for more info */}
+                          <TooltipProvider delayDuration={0}>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <div className="inline-flex items-center gap-1 text-xs text-gray-400 group-hover:text-amber-500 transition-colors">
+                                  <Info className="w-3 h-3" />
+                                  <span className="font-mono">{t("process.hoverForDetails")}</span>
+                                </div>
+                              </TooltipTrigger>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </div>
+                      </div>
+                    </HoverCardTrigger>
+                    
+                    {/* Hover Content */}
+                    <HoverCardContent className="w-80" align="center" side="bottom">
+                      <div className="space-y-3">
+                        <div>
+                          <h4 className="text-sm font-sans font-semibold text-gray-900 mb-1">
+                            {step.title}
+                          </h4>
+                          <p className="text-sm font-mono text-gray-600">
+                            {step.description}
+                          </p>
+                        </div>
+                        
+                        {/* All Highlights in hover */}
+                        {step.highlights.length > 0 && (
+                          <div className="border-t pt-3">
+                            <p className="text-xs font-semibold text-gray-700 mb-2">{t("process.keyPoints")}</p>
+                            <div className="flex flex-col gap-2">
+                              {step.highlights.map((highlight, idx) => (
+                                <div
+                                  key={idx}
+                                  className="inline-flex items-start gap-2 text-xs"
+                                >
+                                  <CheckCircle className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" />
+                                  <span className="font-mono text-gray-600">{highlight}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </HoverCardContent>
+                  </HoverCard>
                 </motion.div>
               );
             })}
@@ -157,6 +204,7 @@ export function HowWeWorkSection() {
         >
           {steps.map((step, index) => {
             const Icon = step.icon;
+            const isExpanded = expandedMobileStep === index;
             
             return (
               <motion.div
@@ -182,30 +230,66 @@ export function HowWeWorkSection() {
 
                 {/* Content */}
                 <div className="flex-1 pb-6">
-                  <div className="bg-white p-4 rounded-lg shadow-md">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-3xl font-sans font-bold text-amber-500/20">
-                        {step.number}
-                      </span>
-                      <h3 className="text-lg font-sans font-bold text-gray-900">
-                        {step.title}
-                      </h3>
-                    </div>
-                    <p className="font-mono text-sm text-gray-600 mb-3">
-                      {step.description}
-                    </p>
-                    {/* Highlights */}
-                    <div className="flex flex-col gap-2">
-                      {step.highlights.map((highlight, idx) => (
-                        <span
-                          key={idx}
-                          className="inline-flex items-center gap-1 px-2 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-mono"
-                        >
-                          <CheckCircle className="w-3 h-3" />
-                          {highlight}
+                  <div 
+                    className="bg-white p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg"
+                    onClick={() => setExpandedMobileStep(isExpanded ? null : index)}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-3xl font-sans font-bold text-amber-500/20">
+                          {step.number}
                         </span>
-                      ))}
+                        <h3 className="text-lg font-sans font-bold text-gray-900">
+                          {step.title}
+                        </h3>
+                      </div>
+                      {/* Expand/Collapse Indicator */}
+                      <motion.div
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ChevronDown className="w-5 h-5 text-amber-500" />
+                      </motion.div>
                     </div>
+                    
+                    {/* Expandable Content */}
+                    <motion.div
+                      initial={false}
+                      animate={{
+                        height: isExpanded ? "auto" : 0,
+                        opacity: isExpanded ? 1 : 0,
+                        marginTop: isExpanded ? 8 : 0
+                      }}
+                      transition={{
+                        duration: 0.3,
+                        ease: "easeInOut"
+                      }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <p className="font-mono text-sm text-gray-600 mb-3">
+                        {step.description}
+                      </p>
+                      {/* Highlights */}
+                      <div className="flex flex-col gap-2">
+                        {step.highlights.map((highlight, idx) => (
+                          <span
+                            key={idx}
+                            className="inline-flex items-center gap-1 px-2 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-mono"
+                          >
+                            <CheckCircle className="w-3 h-3" />
+                            {highlight}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                    
+                    {/* Tap to expand hint - only show when collapsed */}
+                    {!isExpanded && (
+                      <div className="flex items-center gap-1 mt-2 text-xs text-gray-400">
+                        <Info className="w-3 h-3" />
+                        <span className="font-mono">{t("process.tapForDetails")}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.div>
