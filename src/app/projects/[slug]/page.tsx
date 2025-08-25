@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   ArrowLeft, 
   Calendar, 
@@ -15,7 +16,8 @@ import {
   Lightbulb, 
   TrendingUp,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  Expand
 } from 'lucide-react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getProject, type Project } from '@/lib/projects';
@@ -28,6 +30,7 @@ export default function ProjectPage() {
   const { t } = useTranslation();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchProject() {
@@ -308,10 +311,12 @@ export default function ProjectPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="sticky top-24"
+              className="sticky top-24 space-y-6"
             >
+             
+
               {/* Tech Stack */}
-              <div className="bg-white rounded-xl p-6 shadow-lg mb-6 border border-gray-100">
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
                 <div className="flex items-center gap-2 mb-4">
                   <Code2 className="w-5 h-5 text-amber-600" />
                   <h3 className="text-lg font-sans font-semibold text-gray-900">
@@ -348,6 +353,25 @@ export default function ProjectPage() {
                   </div>
                 </div>
               </div>
+               {/* Project Image */}
+               {project.image && (
+                <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                  <div 
+                    className="relative h-64 cursor-pointer group"
+                    onClick={() => setIsImageModalOpen(true)}
+                  >
+                    <Image 
+                      src={project.image} 
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                      <Expand className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  </div>
+                </div>
+              )}
             </motion.div>
           </div>
         </div>
@@ -355,6 +379,36 @@ export default function ProjectPage() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Image Modal */}
+      {isImageModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setIsImageModalOpen(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            className="relative max-w-5xl w-full h-full flex items-center justify-center"
+          >
+            <div className="relative w-full h-full">
+              <Image 
+                src={project.image} 
+                alt={project.title}
+                fill
+                className="object-contain"
+              />
+            </div>
+            <button
+              onClick={() => setIsImageModalOpen(false)}
+              className="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
+            >
+              <span className="text-white text-2xl">&times;</span>
+            </button>
+          </motion.div>
+        </div>
+      )}
     </article>
   );
 }

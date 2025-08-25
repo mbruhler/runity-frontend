@@ -79,7 +79,7 @@ export default function ProjectsPage() {
                 key={project.slug}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.2, delay: index * 0.1 }}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
               >
                 <Link href={`/projects/${project.slug}`} className="block">
@@ -108,7 +108,7 @@ export default function ProjectsPage() {
                       </div>
 
                       <h2 className="text-2xl md:text-3xl font-sans font-bold mb-3 text-gray-900 group-hover:text-amber-600 transition-colors">
-                        {project.title}
+                        {project.title.length > 35 ? project.title.slice(0, 35) + '...' : project.title}
                       </h2>
                       
                       <p className="font-mono text-gray-600 mb-6 line-clamp-2">
@@ -118,7 +118,7 @@ export default function ProjectsPage() {
                       <div className="flex flex-wrap gap-4 mb-6 text-sm font-mono text-gray-500">
                         <div className="flex items-center gap-1">
                           <Users className="w-4 h-4" />
-                          <span>{project.client}</span>
+                          <span>{project.client.length > 20 ? project.client.slice(0, 20) + '...' : project.client}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />

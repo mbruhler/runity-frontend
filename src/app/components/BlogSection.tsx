@@ -90,13 +90,14 @@ export function BlogSection() {
               <motion.div
                 key={post.slug}
                 variants={fadeInUp}
+                className="h-full"
               >
-                <Link href={`/blog/${post.slug}`}>
+                <Link href={`/blog/${post.slug}`} className="block h-full">
                   <Card 
-                    className="hover:shadow-lg transition-all duration-300 cursor-pointer group h-full"
+                    className="hover:shadow-lg transition-all duration-300 cursor-pointer group h-full flex flex-col"
                   >
-                    <CardHeader>
-                      <div className="flex items-center gap-2 mb-2">
+                    <CardHeader className="flex-grow">
+                      <div className="flex items-center gap-2 mb-3">
                         <Badge variant="secondary" className="text-xs font-mono">
                           {post.category}
                         </Badge>
@@ -104,14 +105,24 @@ export function BlogSection() {
                           {new Date(post.date).toLocaleDateString()}
                         </span>
                       </div>
-                      <CardTitle className="text-lg font-sans group-hover:text-amber-600 transition-colors">
-                        {post.title}
+                      <CardTitle className="text-lg font-sans group-hover:text-amber-600 transition-colors line-clamp-2 mb-3">
+                        {post.title.length > 60 ? post.title.slice(0, 60) + '...' : post.title}
                       </CardTitle>
-                      <CardDescription className="flex items-center gap-2 font-mono mt-2">
-                        <BookOpen className="w-4 h-4" />
-                        {post.readTime}
+                      <CardDescription className="font-mono text-gray-600 line-clamp-3">
+                        {post.excerpt && post.excerpt.length > 100 ? post.excerpt.slice(0, 100) + '...' : post.excerpt}
                       </CardDescription>
                     </CardHeader>
+                    <CardContent className="mt-auto pt-0">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-sm font-mono text-gray-500">
+                          <BookOpen className="w-4 h-4" />
+                          <span>{post.readTime}</span>
+                        </div>
+                        <span className="text-sm font-mono text-amber-600 group-hover:translate-x-1 transition-transform">
+                          {t("blog.readMore") || "Read more"} →
+                        </span>
+                      </div>
+                    </CardContent>
                   </Card>
                 </Link>
               </motion.div>

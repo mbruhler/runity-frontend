@@ -141,7 +141,8 @@
     "loading": "Loading latest posts...",
     "noPosts": "No blog posts found",
     "noPostsSubtext": "Check back soon for new content!",
-    "viewAllPosts": "View All Posts"
+    "viewAllPosts": "View All Posts",
+    "readMore": "Read more"
   },
   "contact": {
     "title": "Let's build something together",

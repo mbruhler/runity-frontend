@@ -12,6 +12,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     // Trigger initial animation
@@ -24,21 +25,105 @@ export function Header() {
       } else {
         setIsScrolled(false);
       }
+
+      // Determine active section based on scroll position
+      const sections = ["home", "projects", "services", "blog", "contact"];
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+
+      // If at the very top, set home as active
+      if (window.scrollY < 100) {
+        setActiveSection("home");
+      }
     };
+
+    // Initial check
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Only handle hash links on the same page
+    if (href.startsWith('/#') && window.location.pathname === '/') {
+      e.preventDefault();
+      const targetId = href.substring(2);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        const headerHeight = 80; // Height of fixed header
+        const windowHeight = window.innerHeight;
+        const elementHeight = targetElement.offsetHeight;
+        const elementTop = targetElement.offsetTop;
+        
+        // Calculate position to center the section in viewport
+        // If element is taller than viewport, just scroll to top with header offset
+        let scrollPosition;
+        if (elementHeight > windowHeight - headerHeight) {
+          scrollPosition = elementTop - headerHeight;
+        } else {
+          // Center the element in the viewport
+          scrollPosition = elementTop - (windowHeight - elementHeight) / 2;
+        }
+        
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: 'smooth'
+        });
+      }
+    } else if (href.startsWith('/#')) {
+      // If we're on a different page, let the default behavior happen
+      // The browser will navigate and then jump to the section
+      return;
+    }
+  };
+
   const { t } = useTranslation();
 
   const navItems = [
-    { name: t("navigation.home") as string, href: "/", active: true },
-    { name: t("navigation.projects") as string, href: "/#projects" },
-    { name: t("navigation.services") as string, href: "/#services" },
-    { name: t("navigation.blog") as string, href: "/blog" },
-    { name: t("navigation.contact") as string, href: "/#contact" },
+    { name: t("navigation.home") as string, href: "/", sectionId: "home" },
+    { name: t("navigation.services") as string, href: "/#services", sectionId: "services" },
+    { name: t("navigation.projects") as string, href: "/#projects", sectionId: "projects" },
+    { name: t("navigation.blog") as string, href: "/blog", sectionId: "blog" },
+    { name: t("navigation.contact") as string, href: "/#contact", sectionId: "contact" },
   ];
+
+  // Determine if a nav item is active
+  const isNavItemActive = (item: typeof navItems[0]) => {
+    // Only run on client side
+    if (typeof window === 'undefined') return false;
+    
+    const currentPath = window.location.pathname;
+    
+    // If we're on the home page, check the active section
+    if (currentPath === '/') {
+      return activeSection === item.sectionId;
+    }
+    
+    // Special handling for blog
+    if (currentPath.startsWith('/blog') && item.sectionId === 'blog') {
+      return true;
+    }
+    
+    // Special handling for projects
+    if (currentPath.startsWith('/projects') && item.sectionId === 'projects') {
+      return true;
+    }
+    
+    // If we're on a different page, check if it matches the href
+    return currentPath === item.href;
+  };
 
   return (
     <>
@@ -85,8 +170,9 @@ export function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className={`relative px-4 py-2 text-sm font-mono transition-all duration-300 group ${
-                    item.active
+                    isNavItemActive(item)
                       ? "text-amber-400"
                       : "text-gray-300 hover:text-white"
                   }`}
@@ -102,7 +188,7 @@ export function Header() {
                   {/* Active/Hover underline animation */}
                   <div
                     className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-amber-400 to-orange-500 transition-all duration-300 ${
-                      item.active
+                      isNavItemActive(item)
                         ? "w-8 opacity-100"
                         : "w-0 opacity-0 group-hover:w-8 group-hover:opacity-100"
                     }`}
@@ -186,9 +272,12 @@ export function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+                    handleNavClick(e, item.href);
+                    setIsMobileMenuOpen(false);
+                  }}
                   className={`block px-4 py-3 rounded-lg text-base font-mono transition-all duration-300 ${
-                    item.active
+                    isNavItemActive(item)
                       ? "text-amber-400 bg-amber-400/10"
                       : "text-gray-300 hover:text-white hover:bg-white/5"
                   }`}

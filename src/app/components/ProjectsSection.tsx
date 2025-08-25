@@ -65,7 +65,10 @@ export function ProjectsSection() {
   const getMainStat = (stats: Project['stats']) => {
     const statEntries = Object.entries(stats);
     if (statEntries.length > 0) {
-      return statEntries[0][1];
+      return {
+        value: statEntries[0][1],
+        key: statEntries[0][0].charAt(0).toUpperCase() + statEntries[0][0].slice(1)
+      };
     }
     return null;
   };
@@ -97,9 +100,9 @@ export function ProjectsSection() {
             >
               <Link href={`/projects/${project.slug}`} className="block h-full">
                 <Card 
-                  className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-gray-200 h-full cursor-pointer"
+                  className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-gray-200 h-full cursor-pointer flex flex-col"
                 >
-                  <CardHeader>
+                  <CardHeader className="flex-grow">
                     <div className="flex items-start justify-between mb-4">
                       <div className="p-3 bg-amber-50 rounded-lg group-hover:bg-amber-100 transition-colors">
                         <Code2 className="w-6 h-6 text-amber-500" />
@@ -108,17 +111,19 @@ export function ProjectsSection() {
                         {project.techStack[0]}
                       </Badge>
                     </div>
-                    <CardTitle className="text-xl font-sans line-clamp-2">{project.title}</CardTitle>
-                    <CardDescription className="text-gray-600 font-mono mt-2 line-clamp-3">
-                      {project.description}
+                    <CardTitle className="text-xl  max-w-[300px] font-sans line-clamp-2 mb-2">
+                      {project.title}
+                    </CardTitle>
+                    <CardDescription className="text-gray-600 font-mono line-clamp-3">
+                      {project.description.length > 120 ? project.description.slice(0, 120) + '...' : project.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="mt-auto">
                     <div className="space-y-3">
-                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                      <div className="flex items-center gap-4 text-sm text-gray-500 font-mono">
                         <div className="flex items-center gap-1">
                           <Users className="w-4 h-4" />
-                          <span>{project.client}</span>
+                          <span className="truncate max-w-[180px]">{project.client}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
@@ -127,8 +132,9 @@ export function ProjectsSection() {
                       </div>
                       <div className="flex items-center justify-between">
                         {getMainStat(project.stats) && (
-                          <span className="text-md font-caveat font-semibold text-amber-600">
-                            {getMainStat(project.stats)}
+                          <span className="text-md font-caveat font-bold text-amber-600">
+                            {getMainStat(project.stats)?.key}
+                            : {getMainStat(project.stats)?.value}
                           </span>
                         )}
                         <Button 
