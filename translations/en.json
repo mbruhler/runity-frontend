@@ -1,0 +1,200 @@
+{
+  "navigation": {
+    "home": "Home",
+    "projects": "Projects", 
+    "services": "Services",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "buttons": {
+    "getStarted": "Get Started",
+    "startYourAIJourney": "Start Your AI Journey",
+    "viewCaseStudies": "View Case Studies",
+    "sendMessage": "Send Message"
+  },
+  "hero": {
+    "badge": "Next-Gen AI Automation",
+    "headline": {
+      "part1": "Build AI Systems",
+      "part2": "That Transform",
+      "part3": "Your Business"
+    },
+    "description": "We architect intelligent automation solutions that eliminate repetitive tasks, accelerate growth, and unlock your team's full potential.",
+    "trustIndicators": {
+      "enterpriseReady": "Enterprise Ready",
+      "advancedAIModels": "Advanced AI Models",
+      "expertTeam": "Expert Team"
+    }
+  },
+  "aiFlow": {
+    "dataInput": "Data Input",
+    "processing": "Processing", 
+    "analytics": "Analytics",
+    "output": "Output",
+    "aiCore": "AI Core"
+  },
+  "services": {
+    "title": "Our Services",
+    "items": {
+      "aiStrategyConsulting": {
+        "title": "AI Strategy Consulting",
+        "description": "Define and implement AI strategies tailored to your business goals and industry requirements.",
+        "features": [
+          "Custom AI roadmap",
+          "Technology assessment", 
+          "ROI analysis"
+        ]
+      },
+      "automationDevelopment": {
+        "title": "Automation Development",
+        "description": "Build intelligent automation solutions that streamline operations and enhance productivity.",
+        "features": [
+          "Process automation",
+          "Custom integrations",
+          "Workflow optimization"
+        ]
+      },
+      "llmImplementation": {
+        "title": "LLM Implementation",
+        "description": "Deploy and fine-tune large language models for your specific use cases and requirements.",
+        "features": [
+          "Model selection",
+          "Fine-tuning",
+          "Production deployment"
+        ]
+      },
+      "aiPoweredMobileApps": {
+        "title": "AI-Powered Mobile Apps",
+        "description": "Create intelligent mobile applications that leverage AI to deliver exceptional user experiences and automated functionality.",
+        "features": [
+          "Smart automation",
+          "Cross-platform deployment",
+          "Intelligent UX"
+        ]
+      },
+      "nativeSystemModernization": {
+        "title": "Native System Modernization",
+        "description": "Transform outdated workflows with AI-powered terminal applications that automate data processing and streamline operations.",
+        "features": [
+          "Legacy system integration",
+          "Automated workflows",
+          "Data optimization"
+        ]
+      },
+      "customWebSolutions": {
+        "title": "Custom Web Solutions",
+        "description": "Build secure, AI-enhanced web applications and client portals tailored to your specific business requirements.",
+        "features": [
+          "Custom dashboards",
+          "Secure portals",
+          "AI integration"
+        ]
+      }
+    }
+  },
+  "trust": {
+    "title": "Your Vision, Our Expertise",
+    "titleHighlight": "Guaranteed Results",
+    "subtitle": "Every challenge becomes an opportunity when you partner with us. We don't just deliver solutions – we craft transformative experiences that propel your business forward with confidence and precision.",
+    "stats": {
+      "clientSatisfaction": {
+        "label": "Client Satisfaction",
+        "description": "Success Rate"
+      },
+      "projectsDelivered": {
+        "label": "Projects Delivered",
+        "description": "Across Industries"
+      },
+      "enterpriseClients": {
+        "label": "Enterprise Clients", 
+        "description": "Trust Our Solutions"
+      },
+      "timeReduction": {
+        "label": "Time Reduction",
+        "description": "Average Efficiency Gain"
+      }
+    },
+    "testimonialQuote": "No matter the complexity of your challenge,",
+    "testimonialText": "we're committed to finding the right solution. ",
+    "testimonialSubtext": "Your success is our mission, and we won't rest until you're completely satisfied with the results."
+  },
+  "projects": {
+    "title": "Recent Projects",
+    "subtitle": "Explore our portfolio of successful AI automation implementations and transformative solutions",
+    "viewDetails": "View Details",
+    "learnMore": "Learn more",
+    "viewAll": "View All Projects",
+    "more": "more",
+    "backToProjects": "Back to Projects",
+    "client": "Client",
+    "duration": "Duration",
+    "completed": "Completed",
+    "techStack": "Tech Stack",
+    "technologies": "Technologies",
+    "challenges": "Challenges",
+    "solutions": "Solutions",
+    "results": "Results",
+    "projectHighlights": "Project Highlights"
+  },
+  "blog": {
+    "title": "Insights & Resources",
+    "loading": "Loading latest posts...",
+    "noPosts": "No blog posts found",
+    "noPostsSubtext": "Check back soon for new content!",
+    "viewAllPosts": "View All Posts"
+  },
+  "contact": {
+    "title": "Let's build something together",
+    "subtitle": "Tell us about your project, and we'll get back within 24 hours.",
+    "form": {
+      "name": "Name",
+      "email": "Email", 
+      "company": "Company",
+      "message": "Message",
+      "namePlaceholder": "John Doe",
+      "emailPlaceholder": "john@company.com",
+      "companyPlaceholder": "Acme Inc.",
+      "messagePlaceholder": "Tell us about your project, goals, and timeline...",
+      "sending": "Sending...",
+      "sendMessage": "Send Message",
+      "successMessage": "Thank you for your message! We'll be in touch soon.",
+      "validation": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required", 
+        "emailInvalid": "Please enter a valid email",
+        "messageRequired": "Message is required",
+        "messageMinLength": "Message must be at least 10 characters"
+      }
+    }
+  },
+  "footer": {
+    "companyDescription": "Building intelligent automation for tomorrow's businesses.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "contact": "Contact",
+    "allRightsReserved": "Runity. Building intelligent automation for tomorrow's businesses."
+  },
+  "references": {
+    "title": "Trusted by innovators and growing teams"
+  },
+  "cta": {
+    "projects": {
+      "title": "Ready to Start Your Project?",
+      "subtitle": "Let's discuss how we can help transform your business with AI automation.",
+      "primaryButton": "Get Started Today",
+      "secondaryButton": "View Our Services"
+    },
+    "blog": {
+      "title": "Ready to Transform Your Business?",
+      "subtitle": "Our team of AI automation experts is here to help you implement the solutions discussed in our blog posts.",
+      "primaryButton": "Get Started Today",
+      "secondaryButton": "View Our Work"
+    },
+    "default": {
+      "title": "Ready to Get Started?",
+      "subtitle": "Let's work together to build intelligent automation solutions for your business.",
+      "primaryButton": "Contact Us",
+      "secondaryButton": "Learn More"
+    }
+  }
+}

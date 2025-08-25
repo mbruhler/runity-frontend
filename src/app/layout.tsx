@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto, Roboto_Mono, Caveat } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+import { ClientLayout } from "@/components/ClientLayout";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -53,7 +55,11 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} ${robotoMono.variable} ${caveat.variable} antialiased`}
       >
-        {children}
+        <LanguageProvider>
+          <ClientLayout>
+            {children}
+          </ClientLayout>
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -59,7 +59,7 @@ export default function BlogPostPage() {
     return (
       <div className="min-h-screen bg-white">
         <Header />
-        <div className="pt-20 pb-12 flex items-center justify-center">
+        <div className="pt-32 pb-12 flex items-center justify-center">
           <div className="text-lg font-mono text-gray-600">Loading blog post...</div>
         </div>
       </div>
@@ -70,7 +70,7 @@ export default function BlogPostPage() {
     return (
       <div className="min-h-screen bg-white">
         <Header />
-        <div className="pt-20 pb-12 text-center">
+        <div className="pt-32 pb-12 text-center">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl font-sans font-bold text-gray-900 mb-4">
               Blog Post Not Found
@@ -95,7 +95,7 @@ export default function BlogPostPage() {
       <Header />
       
       {/* Blog Post Header */}
-      <section className="pt-20 pb-12 bg-gradient-to-br from-gray-50 via-white to-amber-50">
+      <section className="pt-32 pb-12 bg-gradient-to-br from-gray-50 via-white to-amber-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="max-w-4xl mx-auto"

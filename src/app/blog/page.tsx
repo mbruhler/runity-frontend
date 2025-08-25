@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, ArrowRight, Calendar, Clock } from "lucide-react";
 import { Header } from "../components/Header";
 import { getBlogPosts, BlogPost } from "@/lib/blog";
+import { CTASection } from "../components/CTASection";
+import { Footer } from "../components/Footer";
 
 // Animation variants
 const fadeInUp = {
@@ -49,7 +51,7 @@ export default function BlogPage() {
     return (
       <div className="min-h-screen bg-white">
         <Header />
-        <div className="pt-20 pb-12 flex items-center justify-center">
+        <div className="pt-32 pb-12 flex items-center justify-center">
           <div className="text-lg font-mono text-gray-600">Loading blog posts...</div>
         </div>
       </div>
@@ -61,7 +63,7 @@ export default function BlogPage() {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-20 pb-12 bg-gradient-to-br from-gray-50 via-white to-amber-50">
+      <section className="pt-32 pb-12 bg-gradient-to-br from-gray-50 via-white to-amber-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="text-center max-w-4xl mx-auto"
@@ -146,67 +148,10 @@ export default function BlogPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            className="text-center max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-sans font-bold text-gray-900 mb-4">
-              Ready to Transform Your Business?
-            </h2>
-            <p className="text-lg font-mono text-gray-600 mb-8">
-              Our team of AI automation experts is here to help you implement the solutions 
-              discussed in our blog posts.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button 
-                  size="lg" 
-                  className="bg-amber-500 hover:bg-amber-600 text-white font-mono font-semibold px-8 py-3"
-                >
-                  Get Started Today
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/#projects">
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-amber-500 text-amber-600 hover:bg-amber-50 font-mono font-semibold px-8 py-3"
-                >
-                  View Our Work
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CTASection variant="blog" />
 
       {/* Footer */}
-      <footer className="py-12 bg-gray-900 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center space-y-4">
-            <div className="text-gray-400 font-mono text-center">
-              © 2024 Runity. Building intelligent automation for tomorrow's businesses.
-            </div>
-            <div className="flex gap-6 text-sm font-mono">
-              <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">
-                Blog
-              </Link>
-              <Link href="/#contact" className="text-gray-400 hover:text-white transition-colors">
-                Contact
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

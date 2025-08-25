@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/contexts/LanguageContext";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,12 +30,14 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const { t } = useTranslation();
+
   const navItems = [
-    { name: "Home", href: "/", active: true },
-    { name: "Projects", href: "/#projects" },
-    { name: "Services", href: "/#services" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/#contact" },
+    { name: t("navigation.home") as string, href: "/", active: true },
+    { name: t("navigation.projects") as string, href: "/#projects" },
+    { name: t("navigation.services") as string, href: "/#services" },
+    { name: t("navigation.blog") as string, href: "/blog" },
+    { name: t("navigation.contact") as string, href: "/#contact" },
   ];
 
   return (
@@ -47,8 +51,8 @@ export function Header() {
         <div
           className={`absolute inset-0 transition-all duration-500 ${
             isScrolled
-              ? "bg-black/80 backdrop-blur-xl border-b border-white/10"
-              : "bg-gradient-to-b from-black/50 to-transparent backdrop-blur-sm"
+              ? "bg-black/80 backdrop-blur-xl"
+              : "bg-black/80"
           }`}
         />
         
@@ -76,7 +80,7 @@ export function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex items-center">
               {navItems.map((item, index) => (
                 <Link
                   key={item.name}
@@ -107,19 +111,28 @@ export function Header() {
               ))}
             </div>
 
-            {/* CTA Button - Desktop */}
-            <div 
-              className="hidden md:block"
-              style={{
-                animation: isVisible ? "fadeInDown 0.5s ease-out 0.8s both" : "",
-              }}
-            >
-              <Button
-                size="sm"
-                className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-6 py-2 text-sm font-mono font-semibold shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 transition-all duration-300 border-0 hover:scale-105"
+            {/* Language Switcher & CTA Button - Desktop */}
+            <div className="hidden md:flex items-center gap-3">
+              <div
+                style={{
+                  animation: isVisible ? "fadeInDown 0.5s ease-out 0.7s both" : "",
+                }}
               >
-                Get Started
-              </Button>
+                <LanguageSwitcher />
+              </div>
+              
+              <div 
+                style={{
+                  animation: isVisible ? "fadeInDown 0.5s ease-out 0.8s both" : "",
+                }}
+              >
+                <Button
+                  size="sm"
+                  className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-6 py-2 text-sm font-mono font-semibold shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 transition-all duration-300 border-0 hover:scale-105"
+                >
+                  {t("buttons.getStarted")}
+                </Button>
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -190,22 +203,33 @@ export function Header() {
               ))}
             </div>
             
-            {/* Mobile CTA Button */}
-            <div 
-              className="mt-6"
-              style={{
-                animation: isMobileMenuOpen
-                  ? "fadeInUp 0.5s ease-out 0.5s both"
-                  : "",
-              }}
-            >
-              <Button
-                size="lg"
-                className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-6 py-3 text-base font-mono font-semibold shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 transition-all duration-300 border-0"
-                onClick={() => setIsMobileMenuOpen(false)}
+            {/* Mobile Language Switcher & CTA Button */}
+            <div className="mt-6 space-y-4">
+              <div
+                style={{
+                  animation: isMobileMenuOpen
+                    ? "fadeInUp 0.5s ease-out 0.4s both"
+                    : "",
+                }}
               >
-                Get Started
-              </Button>
+                <LanguageSwitcher />
+              </div>
+              
+              <div 
+                style={{
+                  animation: isMobileMenuOpen
+                    ? "fadeInUp 0.5s ease-out 0.5s both"
+                    : "",
+                }}
+              >
+                <Button
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-6 py-3 text-base font-mono font-semibold shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 transition-all duration-300 border-0"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {t("buttons.getStarted")}
+                </Button>
+              </div>
             </div>
           </div>
         </div>

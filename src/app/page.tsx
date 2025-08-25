@@ -3,6 +3,7 @@
 import { Header } from "./components/Header";
 import { HeroSection } from "./components/HeroSection";
 import { ReferencesCarousel } from "./components/ReferencesCarousel";
+import { TrustSection } from "./components/TrustSection";
 import { ServicesSection } from "./components/ServicesSection";
 import { ProjectsSection } from "./components/ProjectsSection";
 import { BlogSection } from "./components/BlogSection";
@@ -23,6 +24,9 @@ export default function Home() {
 
       {/* Services Section */}
       <ServicesSection />
+
+      {/* Trust Building Section */}
+      <TrustSection />
 
       {/* Projects Section */}
       <ProjectsSection />

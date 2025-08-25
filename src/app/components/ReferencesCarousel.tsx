@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 const companies = [
   { id: 1, name: "TechCorp Solutions" },
@@ -21,7 +22,7 @@ const duplicatedCompanies = [...companies, ...companies];
 
 export function ReferencesCarousel() {
   const sectionRef = useRef<HTMLElement>(null);
-  
+  const { t } = useTranslation();
   // Parallax scroll setup
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -72,7 +73,7 @@ export function ReferencesCarousel() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl font-sans font-bold text-gray-900 mb-4">
-            Trusted by innovators and growing teams
+            {t("references.title")}
           </h2>
         </motion.div>
       </div>

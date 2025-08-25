@@ -1,8 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 export function Footer() {
+  const { t } = useTranslation();
+  
   return (
     <footer className="py-12 bg-gray-900 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,17 +18,17 @@ export function Footer() {
             className="h-30 w-auto brightness-0 invert opacity-90 hover:opacity-100 transition-opacity duration-300"
           />
           <p className="text-gray-400 font-mono text-center">
-            © 2024 Runity. Building intelligent automation for tomorrow's businesses.
+            © {new Date().getFullYear()} {t("footer.allRightsReserved")}
           </p>
           <div className="flex gap-6 text-sm font-mono">
             <a href="#" className="text-gray-400 hover:text-white transition-colors">
-              Privacy Policy
+              {t("footer.privacyPolicy")}
             </a>
             <a href="#" className="text-gray-400 hover:text-white transition-colors">
-              Terms of Service
+              {t("footer.termsOfService")}
             </a>
             <a href="#" className="text-gray-400 hover:text-white transition-colors">
-              Contact
+              {t("footer.contact")}
             </a>
           </div>
         </div>

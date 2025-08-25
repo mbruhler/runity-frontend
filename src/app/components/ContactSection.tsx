@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 interface FormData {
   name: string;
@@ -17,6 +18,8 @@ interface FormData {
 }
 
 export function ContactSection() {
+  const { t } = useTranslation();
+  
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -31,19 +34,19 @@ export function ContactSection() {
     const errors: Record<string, string> = {};
     
     if (!formData.name.trim()) {
-      errors.name = "Name is required";
+      errors.name = t("contact.form.validation.nameRequired") as string;
     }
     
     if (!formData.email.trim()) {
-      errors.email = "Email is required";
+      errors.email = t("contact.form.validation.emailRequired") as string;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = "Please enter a valid email";
+      errors.email = t("contact.form.validation.emailInvalid") as string;
     }
     
     if (!formData.message.trim()) {
-      errors.message = "Message is required";
+      errors.message = t("contact.form.validation.messageRequired") as string;
     } else if (formData.message.trim().length < 10) {
-      errors.message = "Message must be at least 10 characters";
+      errors.message = t("contact.form.validation.messageMinLength") as string;
     }
     
     setFormErrors(errors);
@@ -92,10 +95,10 @@ export function ContactSection() {
             viewport={{ once: true, amount: 0.3 }}
           >
             <h2 className="text-3xl font-sans font-bold text-gray-900 mb-4">
-              Let's build something together
+              {t("contact.title")}
             </h2>
             <p className="text-lg font-mono text-gray-600">
-              Tell us about your project, and we'll get back within 24 hours.
+              {t("contact.subtitle")}
             </p>
           </motion.div>
 
@@ -107,7 +110,7 @@ export function ContactSection() {
               transition={{ duration: 0.3 }}
             >
               <p className="text-green-800 font-mono font-medium">
-                Thank you for your message! We'll be in touch soon.
+                {t("contact.form.successMessage")}
               </p>
             </motion.div>
           )}
@@ -124,14 +127,14 @@ export function ContactSection() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="name" className="font-mono">
-                        Name <span className="text-red-500">*</span>
+                        {t("contact.form.name")} <span className="text-red-500">*</span>
                       </Label>
                       <Input
                         id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        placeholder="John Doe"
+                        placeholder={t("contact.form.namePlaceholder") as string}
                         className={formErrors.name ? "border-red-500" : ""}
                       />
                       {formErrors.name && (
@@ -141,7 +144,7 @@ export function ContactSection() {
 
                     <div className="space-y-2">
                       <Label htmlFor="email" className="font-mono">
-                        Email <span className="text-red-500">*</span>
+                        {t("contact.form.email")} <span className="text-red-500">*</span>
                       </Label>
                       <Input
                         id="email"
@@ -149,7 +152,7 @@ export function ContactSection() {
                         type="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        placeholder="john@company.com"
+                        placeholder={t("contact.form.emailPlaceholder") as string}
                         className={formErrors.email ? "border-red-500" : ""}
                       />
                       {formErrors.email && (
@@ -159,26 +162,26 @@ export function ContactSection() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="company" className="font-mono">Company</Label>
+                    <Label htmlFor="company" className="font-mono">{t("contact.form.company")}</Label>
                     <Input
                       id="company"
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      placeholder="Acme Inc."
+                      placeholder={t("contact.form.companyPlaceholder") as string}
                     />
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="message" className="font-mono">
-                      Message <span className="text-red-500">*</span>
+                      {t("contact.form.message")} <span className="text-red-500">*</span>
                     </Label>
                     <Textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
-                      placeholder="Tell us about your project, goals, and timeline..."
+                      placeholder={t("contact.form.messagePlaceholder") as string}
                       rows={5}
                       className={formErrors.message ? "border-red-500" : ""}
                     />
@@ -196,11 +199,11 @@ export function ContactSection() {
                     {isSubmitting ? (
                       <>
                         <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                        Sending...
+                        {t("contact.form.sending")}
                       </>
                     ) : (
                       <>
-                        Send Message
+                        {t("contact.form.sendMessage")}
                         <Send className="ml-2 h-5 w-5" />
                       </>
                     )}

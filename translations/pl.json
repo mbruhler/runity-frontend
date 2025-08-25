@@ -1,0 +1,200 @@
+{
+  "navigation": {
+    "home": "Strona Główna",
+    "projects": "Projekty", 
+    "services": "Usługi",
+    "blog": "Blog",
+    "contact": "Kontakt"
+  },
+  "buttons": {
+    "getStarted": "Zaczynamy",
+    "startYourAIJourney": "Rozpocznij Transformację z AI",
+    "viewCaseStudies": "Zobacz Nasze Realizacje",
+    "sendMessage": "Wyślij Wiadomość"
+  },
+  "hero": {
+    "badge": "Najnowsza Generacja Automatyzacji AI",
+    "headline": {
+      "part1": "Tworzymy Systemy AI",
+      "part2": "Które Zmienią",
+      "part3": "Twój Biznes"
+    },
+    "description": "Projektujemy inteligentne rozwiązania automatyzacji, które eliminują rutynowe zadania, przyspieszają rozwój i uwalniają pełen potencjał Twojego zespołu.",
+    "trustIndicators": {
+      "enterpriseReady": "Klasa Enterprise",
+      "advancedAIModels": "Najnowsze Modele AI",
+      "expertTeam": "Zespół Ekspertów"
+    }
+  },
+  "aiFlow": {
+    "dataInput": "Dane Wejściowe",
+    "processing": "Proces", 
+    "analytics": "Analityka",
+    "output": "Wyniki",
+    "aiCore": "AI"
+  },
+  "services": {
+    "title": "Nasze Usługi",
+    "items": {
+      "aiStrategyConsulting": {
+        "title": "Strategia AI",
+        "description": "Opracowujemy i wdrażamy strategie AI dopasowane do Twoich celów biznesowych i specyfiki branży.",
+        "features": [
+          "Indywidualna mapa drogowa AI",
+          "Audyt technologiczny", 
+          "Analiza ROI"
+        ]
+      },
+      "automationDevelopment": {
+        "title": "Rozwój Automatyzacji",
+        "description": "Tworzymy inteligentne systemy automatyzacji, które optymalizują procesy i maksymalizują produktywność.",
+        "features": [
+          "Automatyzacja procesów biznesowych",
+          "Dedykowane integracje",
+          "Optymalizacja workflow"
+        ]
+      },
+      "llmImplementation": {
+        "title": "Implementacja LLM",
+        "description": "Wdrażamy i dostrajamy wielkie modele językowe pod konkretne przypadki użycia i wymagania Twojej firmy.",
+        "features": [
+          "Dobór optymalnego modelu",
+          "Fine-tuning",
+          "Wdrożenie produkcyjne"
+        ]
+      },
+      "aiPoweredMobileApps": {
+        "title": "Aplikacje Mobilne z AI",
+        "description": "Budujemy inteligentne aplikacje mobilne wykorzystujące AI do tworzenia wyjątkowych doświadczeń użytkownika.",
+        "features": [
+          "Inteligentna automatyzacja",
+          "Rozwój cross-platform",
+          "Zaawansowany UX"
+        ]
+      },
+      "nativeSystemModernization": {
+        "title": "Modernizacja Systemów Legacy",
+        "description": "Transformujemy przestarzałe procesy za pomocą aplikacji terminalowych z AI, automatyzujących przetwarzanie danych.",
+        "features": [
+          "Integracja z systemami legacy",
+          "Automatyzacja przepływów pracy",
+          "Optymalizacja procesów danych"
+        ]
+      },
+      "customWebSolutions": {
+        "title": "Dedykowane Rozwiązania Web",
+        "description": "Tworzymy bezpieczne aplikacje internetowe i portale klienckie wzbogacone o funkcjonalności AI.",
+        "features": [
+          "Personalizowane dashboardy",
+          "Bezpieczne portale klienckie",
+          "Integracja z AI"
+        ]
+      }
+    }
+  },
+  "trust": {
+    "title": "Twoja Wizja, Nasze Doświadczenie",
+    "titleHighlight": "Gwarantowane Rezultaty",
+    "subtitle": "Każde wyzwanie to dla nas szansa na sukces. Nie tylko dostarczamy rozwiązania – tworzymy przełomowe doświadczenia, które napędzają Twój biznes z pewnością i precyzją.",
+    "stats": {
+      "clientSatisfaction": {
+        "label": "Zadowolenie Klientów",
+        "description": "Wskaźnik Sukcesu"
+      },
+      "projectsDelivered": {
+        "label": "Zrealizowane Projekty",
+        "description": "W Różnych Branżach"
+      },
+      "enterpriseClients": {
+        "label": "Klienci Korporacyjni", 
+        "description": "Ufają Naszym Rozwiązaniom"
+      },
+      "timeReduction": {
+        "label": "Oszczędność Czasu",
+        "description": "Średni Wzrost Wydajności"
+      }
+    },
+    "testimonialQuote": "Niezależnie od złożoności Twojego projektu,",
+    "testimonialText": "zobowiązujemy się znaleźć najlepsze rozwiązanie. ",
+    "testimonialSubtext": "Twój sukces to nasza misja, i pracujemy tak długo, aż osiągniemy perfekcyjny rezultat."
+  },
+  "projects": {
+    "title": "Nasze Najnowsze Realizacje",
+    "subtitle": "Poznaj nasze portfolio udanych wdrożeń automatyzacji AI i transformacyjnych rozwiązań",
+    "viewDetails": "Zobacz szczegóły",
+    "learnMore": "Dowiedz się więcej",
+    "viewAll": "Zobacz wszystkie projekty",
+    "more": "więcej",
+    "backToProjects": "Powrót do projektów",
+    "client": "Klient",
+    "duration": "Czas realizacji",
+    "completed": "Zakończono",
+    "techStack": "Stos technologiczny",
+    "technologies": "Technologie",
+    "challenges": "Wyzwania",
+    "solutions": "Rozwiązania",
+    "results": "Rezultaty",
+    "projectHighlights": "Najważniejsze informacje"
+  },
+  "blog": {
+    "title": "Wiedza i Zasoby",
+    "loading": "Ładowanie najnowszych artykułów...",
+    "noPosts": "Brak artykułów",
+    "noPostsSubtext": "Wkrótce pojawią się tu nowe treści!",
+    "viewAllPosts": "Zobacz wszystkie artykuły"
+  },
+  "contact": {
+    "title": "Stwórzmy razem coś wyjątkowego",
+    "subtitle": "Opowiedz nam o swoim projekcie – odpowiemy w ciągu 24 godzin.",
+    "form": {
+      "name": "Imię i nazwisko",
+      "email": "Adres e-mail", 
+      "company": "Nazwa firmy",
+      "message": "Opis projektu",
+      "namePlaceholder": "Jan Kowalski",
+      "emailPlaceholder": "jan@firma.pl",
+      "companyPlaceholder": "Nazwa Firmy Sp. z o.o.",
+      "messagePlaceholder": "Opisz swój projekt, cele biznesowe i przewidywany harmonogram...",
+      "sending": "Wysyłanie...",
+      "sendMessage": "Wyślij Zapytanie",
+      "successMessage": "Dziękujemy za wiadomość! Skontaktujemy się z Tobą już wkrótce.",
+      "validation": {
+        "nameRequired": "Imię i nazwisko są wymagane",
+        "emailRequired": "Adres e-mail jest wymagany", 
+        "emailInvalid": "Podaj poprawny adres e-mail",
+        "messageRequired": "Opis projektu jest wymagany",
+        "messageMinLength": "Opis projektu musi zawierać co najmniej 10 znaków"
+      }
+    }
+  },
+  "footer": {
+    "companyDescription": "Tworzymy inteligentną automatyzację dla biznesu przyszłości.",
+    "privacyPolicy": "Polityka Prywatności",
+    "termsOfService": "Regulamin",
+    "contact": "Kontakt",
+    "allRightsReserved": "Runity. Tworzymy inteligentną automatyzację dla biznesu przyszłości."
+  },
+  "references": {
+    "title": "Zaufali Nam"
+  },
+  "cta": {
+    "projects": {
+      "title": "Gotowy na Swój Projekt?",
+      "subtitle": "Porozmawiajmy o tym, jak możemy pomóc przekształcić Twój biznes dzięki automatyzacji AI.",
+      "primaryButton": "Zacznij Już Dziś",
+      "secondaryButton": "Zobacz Nasze Usługi"
+    },
+    "blog": {
+      "title": "Gotowy na Transformację Biznesu?",
+      "subtitle": "Nasz zespół ekspertów automatyzacji AI pomoże Ci wdrożyć rozwiązania omówione w naszych artykułach.",
+      "primaryButton": "Zacznij Już Dziś",
+      "secondaryButton": "Zobacz Nasze Realizacje"
+    },
+    "default": {
+      "title": "Gotowy do Rozpoczęcia?",
+      "subtitle": "Współpracujmy, aby stworzyć inteligentne rozwiązania automatyzacji dla Twojego biznesu.",
+      "primaryButton": "Skontaktuj się",
+      "secondaryButton": "Dowiedz się Więcej"
+    }
+  }
+}

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, ArrowRight } from "lucide-react";
 import { getBlogPosts, BlogPost } from "@/lib/blog";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 // Animation Variants
 const fadeInUp = {
@@ -20,7 +21,7 @@ const fadeInUp = {
     y: 0,
     transition: {
       duration: 0.7,
-      ease: "easeOut"
+      ease: "easeOut" as const
     }
   }
 };
@@ -36,6 +37,7 @@ const staggerContainer = {
 };
 
 export function BlogSection() {
+  const { t } = useTranslation();
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [blogLoading, setBlogLoading] = useState(true);
 
@@ -64,17 +66,17 @@ export function BlogSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          Insights & Resources
+          {t("blog.title")}
         </motion.h2>
         {blogLoading ? (
           <div className="text-center py-12">
-            <div className="text-lg font-mono text-gray-600">Loading latest posts...</div>
+            <div className="text-lg font-mono text-gray-600">{t("blog.loading")}</div>
           </div>
         ) : blogPosts.length === 0 ? (
           <div className="text-center py-12">
             <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-xl font-sans font-semibold text-gray-900 mb-2">No blog posts found</h3>
-            <p className="text-gray-600 font-mono">Check back soon for new content!</p>
+            <h3 className="text-xl font-sans font-semibold text-gray-900 mb-2">{t("blog.noPosts")}</h3>
+            <p className="text-gray-600 font-mono">{t("blog.noPostsSubtext")}</p>
           </div>
         ) : (
           <motion.div 
@@ -131,7 +133,7 @@ export function BlogSection() {
         >
           <Link href="/blog">
             <Button variant="outline" size="lg" className="font-mono">
-              View All Posts
+              {t("blog.viewAllPosts")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>

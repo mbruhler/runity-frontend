@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Zap, Cpu, Shield, Smartphone, Terminal, Globe } from "lucide-react";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 // Animation Variants for Services
 const fadeInUp = {
@@ -61,41 +62,43 @@ const staggerContainer = {
 };
 
 export function ServicesSection() {
+  const { t, tArray } = useTranslation();
+  
   const services = [
     {
-      title: "AI Strategy Consulting",
-      description: "Define and implement AI strategies tailored to your business goals and industry requirements.",
-      features: ["Custom AI roadmap", "Technology assessment", "ROI analysis"],
+      title: t("services.items.aiStrategyConsulting.title") as string,
+      description: t("services.items.aiStrategyConsulting.description") as string,
+      features: tArray("services.items.aiStrategyConsulting.features"),
       icon: <Zap className="w-8 h-8 text-amber-500" />
     },
     {
-      title: "Automation Development",
-      description: "Build intelligent automation solutions that streamline operations and enhance productivity.",
-      features: ["Process automation", "Custom integrations", "Workflow optimization"],
+      title: t("services.items.automationDevelopment.title") as string,
+      description: t("services.items.automationDevelopment.description") as string,
+      features: tArray("services.items.automationDevelopment.features"),
       icon: <Cpu className="w-8 h-8 text-amber-500" />
     },
     {
-      title: "LLM Implementation",
-      description: "Deploy and fine-tune large language models for your specific use cases and requirements.",
-      features: ["Model selection", "Fine-tuning", "Production deployment"],
+      title: t("services.items.llmImplementation.title") as string,
+      description: t("services.items.llmImplementation.description") as string,
+      features: tArray("services.items.llmImplementation.features"),
       icon: <Shield className="w-8 h-8 text-amber-500" />
     },
     {
-      title: "AI-Powered Mobile Apps",
-      description: "Create intelligent mobile applications that leverage AI to deliver exceptional user experiences and automated functionality.",
-      features: ["Smart automation", "Cross-platform deployment", "Intelligent UX"],
+      title: t("services.items.aiPoweredMobileApps.title") as string,
+      description: t("services.items.aiPoweredMobileApps.description") as string,
+      features: tArray("services.items.aiPoweredMobileApps.features"),
       icon: <Smartphone className="w-8 h-8 text-amber-500" />
     },
     {
-      title: "Native System Modernization",
-      description: "Transform outdated workflows with AI-powered terminal applications that automate data processing and streamline operations.",
-      features: ["Legacy system integration", "Automated workflows", "Data optimization"],
+      title: t("services.items.nativeSystemModernization.title") as string,
+      description: t("services.items.nativeSystemModernization.description") as string,
+      features: tArray("services.items.nativeSystemModernization.features"),
       icon: <Terminal className="w-8 h-8 text-amber-500" />
     },
     {
-      title: "Custom Web Solutions",
-      description: "Build secure, AI-enhanced web applications and client portals tailored to your specific business requirements.",
-      features: ["Custom dashboards", "Secure portals", "AI integration"],
+      title: t("services.items.customWebSolutions.title") as string,
+      description: t("services.items.customWebSolutions.description") as string,
+      features: tArray("services.items.customWebSolutions.features"),
       icon: <Globe className="w-8 h-8 text-amber-500" />
     }
   ];
@@ -110,7 +113,7 @@ export function ServicesSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: true, amount: 0.3 }}
         >
-          Our Services
+          {t("services.title")}
         </motion.h2>
         <motion.div 
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
