@@ -311,7 +311,8 @@ export function TrustSection() {
             className="text-5xl lg:text-5xl font-sans font-bold text-gray-900 leading-tight mb-6"
             variants={fadeInUp}
           >
-            {t("trust.title")}{" "}
+            {t("trust.title")}&nbsp;
+            <br />
             <span className="text-transparent font-caveat bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">
               {t("trust.titleHighlight")}&nbsp;
             </span>
