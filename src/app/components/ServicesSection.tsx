@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Zap, Cpu, Shield } from "lucide-react";
+import { CheckCircle, Zap, Cpu, Shield, Smartphone, Terminal, Globe } from "lucide-react";
 
 // Animation Variants for Services
 const fadeInUp = {
@@ -79,6 +79,24 @@ export function ServicesSection() {
       description: "Deploy and fine-tune large language models for your specific use cases and requirements.",
       features: ["Model selection", "Fine-tuning", "Production deployment"],
       icon: <Shield className="w-8 h-8 text-amber-500" />
+    },
+    {
+      title: "AI-Powered Mobile Apps",
+      description: "Create intelligent mobile applications that leverage AI to deliver exceptional user experiences and automated functionality.",
+      features: ["Smart automation", "Cross-platform deployment", "Intelligent UX"],
+      icon: <Smartphone className="w-8 h-8 text-amber-500" />
+    },
+    {
+      title: "Native System Modernization",
+      description: "Transform outdated workflows with AI-powered terminal applications that automate data processing and streamline operations.",
+      features: ["Legacy system integration", "Automated workflows", "Data optimization"],
+      icon: <Terminal className="w-8 h-8 text-amber-500" />
+    },
+    {
+      title: "Custom Web Solutions",
+      description: "Build secure, AI-enhanced web applications and client portals tailored to your specific business requirements.",
+      features: ["Custom dashboards", "Secure portals", "AI integration"],
+      icon: <Globe className="w-8 h-8 text-amber-500" />
     }
   ];
 
@@ -95,7 +113,7 @@ export function ServicesSection() {
           Our Services
         </motion.h2>
         <motion.div 
-          className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
           variants={staggerContainer}
           initial="initial"
           whileInView="whileInView"
@@ -104,7 +122,7 @@ export function ServicesSection() {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              variants={index === 0 ? fadeInLeft : index === 2 ? fadeInRight : fadeInUp}
+              variants={index % 3 === 0 ? fadeInLeft : index % 3 === 2 ? fadeInRight : fadeInUp}
             >
               <Card 
                 className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-gray-200 h-full"
