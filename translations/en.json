@@ -3,6 +3,7 @@
     "home": "Home",
     "projects": "Projects", 
     "services": "Services",
+    "process": "How We Work",
     "blog": "Blog",
     "contact": "Contact"
   },
@@ -177,6 +178,44 @@
   },
   "references": {
     "title": "Trusted by innovators and growing teams"
+  },
+  "process": {
+    "title": "How We Work",
+    "subtitle": "Our proven 6-step process transforms your business challenges into AI-powered solutions",
+    "steps": {
+      "1": {
+        "title": "First Contact",
+        "description": "Your journey begins with a simple message. Whether through our contact form, email, or phone, we respond within 24 hours because we know time is money in your business. Our team immediately begins understanding your unique challenges and goals.",
+        "highlights": ["24-hour response", "Personal consultation", "Initial assessment"]
+      },
+      "2": {
+        "title": "Deep Discovery",
+        "description": "Our AI specialists dive deep into your current processes, identifying bottlenecks and untapped opportunities. We don't just listen—we analyze, research your industry, and benchmark against best practices to uncover game-changing automation possibilities.",
+        "highlights": ["Process analysis", "Industry research", "Opportunity mapping"]
+      },
+      "3": {
+        "title": "Strategic Alignment",
+        "description": "We schedule a comprehensive strategy session to present our findings and discuss your vision in detail. This isn't just a sales call—it's a collaborative workshop where we align on objectives, timelines, and success metrics that matter to your business.",
+        "highlights": ["Strategy workshop", "Goal alignment", "Success metrics"]
+      },
+      "4": {
+        "title": "Tailored Solution",
+        "description": "Receive a detailed, customized proposal that outlines exactly how we'll transform your operations. Every recommendation is backed by data, includes ROI projections, and comes with transparent pricing—no hidden fees, no surprises.",
+        "highlights": ["Custom proposal", "ROI projections", "Transparent pricing"]
+      },
+      "5": {
+        "title": "Precision Engineering",
+        "description": "Our expert team builds and implements your AI automation solution with surgical precision. You'll receive regular progress updates, testing previews, and direct access to our developers throughout the entire development process.",
+        "highlights": ["Expert development", "Regular updates", "Direct communication"]
+      },
+      "6": {
+        "title": "Success Delivered",
+        "description": "Your AI automation goes live with full documentation, training, and ongoing support. We don't just deliver—we ensure your team is empowered to maximize results. Success is measured by your growth, not just our deployment.",
+        "highlights": ["Full documentation", "Team training", "Ongoing support"]
+      }
+    },
+    "ctaText": "Ready to transform your business with AI?",
+    "ctaButton": "Start Your Journey Today"
   },
   "cta": {
     "projects": {

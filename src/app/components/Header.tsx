@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,7 +28,7 @@ export function Header() {
       }
 
       // Determine active section based on scroll position
-      const sections = ["home", "projects", "services", "blog", "contact"];
+      const sections = ["home", "services", "process", "projects", "blog", "contact"];
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
       for (const sectionId of sections) {
@@ -62,25 +63,26 @@ export function Header() {
       const targetElement = document.getElementById(targetId);
       
       if (targetElement) {
-        const headerHeight = 80; // Height of fixed header
-        const windowHeight = window.innerHeight;
-        const elementHeight = targetElement.offsetHeight;
-        const elementTop = targetElement.offsetTop;
+        // Force all child elements with Framer Motion to be visible
+        const animatedElements = targetElement.querySelectorAll('[style*="opacity"]');
+        animatedElements.forEach((el) => {
+          (el as HTMLElement).style.opacity = '1';
+          (el as HTMLElement).style.transform = 'none';
+        });
         
-        // Calculate position to center the section in viewport
-        // If element is taller than viewport, just scroll to top with header offset
-        let scrollPosition;
-        if (elementHeight > windowHeight - headerHeight) {
-          scrollPosition = elementTop - headerHeight;
-        } else {
-          // Center the element in the viewport
-          scrollPosition = elementTop - (windowHeight - elementHeight) / 2;
-        }
+        const headerHeight = 80;
+        const elementTop = targetElement.getBoundingClientRect().top + window.scrollY;
+        const scrollPosition = elementTop - headerHeight;
         
         window.scrollTo({
           top: scrollPosition,
           behavior: 'smooth'
         });
+        
+        // Force Framer Motion to recalculate viewport
+        setTimeout(() => {
+          window.dispatchEvent(new Event('scroll'));
+        }, 500);
       }
     } else if (href.startsWith('/#')) {
       // If we're on a different page, let the default behavior happen
@@ -90,11 +92,13 @@ export function Header() {
   };
 
   const { t } = useTranslation();
+  const { scrollToSection } = useSmoothScroll();
 
   const navItems = [
     { name: t("navigation.home") as string, href: "/", sectionId: "home" },
     { name: t("navigation.services") as string, href: "/#services", sectionId: "services" },
-    { name: t("navigation.projects") as string, href: "/#projects", sectionId: "projects" },
+    { name: t("navigation.process") as string, href: "/#process", sectionId: "process" },
+    { name: t("navigation.projects") as string, href: "/projects", sectionId: "projects" },
     { name: t("navigation.blog") as string, href: "/blog", sectionId: "blog" },
     { name: t("navigation.contact") as string, href: "/#contact", sectionId: "contact" },
   ];
@@ -215,6 +219,7 @@ export function Header() {
                 <Button
                   size="sm"
                   className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-6 py-2 text-sm font-mono font-semibold shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 transition-all duration-300 border-0 hover:scale-105"
+                  onClick={() => scrollToSection('/#contact')}
                 >
                   {t("buttons.getStarted")}
                 </Button>
@@ -314,7 +319,10 @@ export function Header() {
                 <Button
                   size="lg"
                   className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-6 py-3 text-base font-mono font-semibold shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 transition-all duration-300 border-0"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    scrollToSection('/#contact');
+                  }}
                 >
                   {t("buttons.getStarted")}
                 </Button>

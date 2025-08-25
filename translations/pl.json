@@ -3,6 +3,7 @@
     "home": "Strona Główna",
     "projects": "Projekty", 
     "services": "Usługi",
+    "process": "Jak Działamy",
     "blog": "Blog",
     "contact": "Kontakt"
   },
@@ -177,6 +178,44 @@
   },
   "references": {
     "title": "Zaufali Nam"
+  },
+  "process": {
+    "title": "Jak Działamy",
+    "subtitle": "Nasz sprawdzony 6-etapowy proces przekształca wyzwania Twojego biznesu w rozwiązania napędzane przez AI",
+    "steps": {
+      "1": {
+        "title": "Pierwszy Kontakt",
+        "description": "Twoja podróż rozpoczyna się od prostej wiadomości. Czy to przez formularz kontaktowy, e-mail czy telefon - odpowiadamy w ciągu 24 godzin, bo wiemy, że czas to pieniądz. Nasz zespół natychmiast rozpoczyna analizę Twoich unikalnych wyzwań i celów biznesowych.",
+        "highlights": ["Odpowiedź w 24h", "Osobiste konsultacje", "Wstępna analiza"]
+      },
+      "2": {
+        "title": "Dogłębna Analiza",
+        "description": "Nasi specjaliści AI zagłębiają się w Twoje procesy biznesowe, identyfikując wąskie gardła i niewykorzystane możliwości. Nie tylko słuchamy - analizujemy, badamy Twoją branżę i porównujemy z najlepszymi praktykami, aby odkryć przełomowe możliwości automatyzacji.",
+        "highlights": ["Analiza procesów", "Badanie branży", "Mapowanie możliwości"]
+      },
+      "3": {
+        "title": "Strategiczne Dopasowanie",
+        "description": "Organizujemy kompleksową sesję strategiczną, aby przedstawić nasze odkrycia i szczegółowo omówić Twoją wizję. To nie jest zwykłe spotkanie sprzedażowe - to warsztat współpracy, gdzie ustalamy cele, terminy i mierniki sukcesu istotne dla Twojego biznesu.",
+        "highlights": ["Warsztat strategiczny", "Ustalenie celów", "Mierniki sukcesu"]
+      },
+      "4": {
+        "title": "Rozwiązanie Szyte na Miarę",
+        "description": "Otrzymujesz szczegółową, spersonalizowaną propozycję, która dokładnie pokazuje, jak przekształcimy Twoje operacje. Każda rekomendacja jest poparta danymi, zawiera prognozy ROI i przejrzyste ceny - bez ukrytych kosztów, bez niespodzianek.",
+        "highlights": ["Propozycja na miarę", "Prognozy ROI", "Przejrzyste ceny"]
+      },
+      "5": {
+        "title": "Precyzyjne Wdrożenie",
+        "description": "Nasz zespół ekspertów buduje i implementuje Twoje rozwiązanie automatyzacji AI z chirurgiczną precyzją. Otrzymujesz regularne aktualizacje postępów, podglądy testów i bezpośredni dostęp do naszych programistów przez cały proces rozwoju.",
+        "highlights": ["Eksperckie wdrożenie", "Regularne aktualizacje", "Bezpośrednia komunikacja"]
+      },
+      "6": {
+        "title": "Sukces Dostarczony",
+        "description": "Twoja automatyzacja AI startuje z pełną dokumentacją, szkoleniem i ciągłym wsparciem. Nie tylko dostarczamy - upewniamy się, że Twój zespół ma wszystkie narzędzia do maksymalizacji wyników. Sukces mierzymy Twoim wzrostem, nie tylko naszym wdrożeniem.",
+        "highlights": ["Pełna dokumentacja", "Szkolenie zespołu", "Ciągłe wsparcie"]
+      }
+    },
+    "ctaText": "Gotowy przekształcić swój biznes dzięki AI?",
+    "ctaButton": "Rozpocznij Swoją Podróż Już Dziś"
   },
   "cta": {
     "projects": {

@@ -5,6 +5,7 @@ import { HeroSection } from "./components/HeroSection";
 import { ReferencesCarousel } from "./components/ReferencesCarousel";
 import { TrustSection } from "./components/TrustSection";
 import { ServicesSection } from "./components/ServicesSection";
+import { HowWeWorkSection } from "./components/HowWeWorkSection";
 import { ProjectsSection } from "./components/ProjectsSection";
 import { BlogSection } from "./components/BlogSection";
 import { ContactSection } from "./components/ContactSection";
@@ -25,6 +26,8 @@ export default function Home() {
       {/* Services Section */}
       <ServicesSection />
 
+      {/* How We Work Timeline */}
+      <HowWeWorkSection />
       {/* Trust Building Section */}
       <TrustSection />
 

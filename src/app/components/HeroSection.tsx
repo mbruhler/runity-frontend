@@ -6,9 +6,12 @@ import { HeroBackground } from "./hero-background";
 import { AnimatedGrid } from "./animated-grid";
 import { useTranslation } from "@/contexts/LanguageContext";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
+import Link from "next/link";
 
 export function HeroSection() {
   const { t } = useTranslation();
+  const { scrollToSection } = useSmoothScroll();
   
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-black">
@@ -110,17 +113,20 @@ export function HeroSection() {
               <Button 
                 size="lg" 
                 className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-10 py-7 text-lg font-mono font-semibold shadow-2xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all duration-300 group border-0 hover:scale-105"
+                onClick={() => scrollToSection('/#contact')}
               >
                 {t("buttons.startYourAIJourney")}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-2 border-amber-400/40 text-amber-400 hover:bg-amber-400/10 hover:text-white backdrop-blur-sm px-10 py-7 text-lg font-mono font-semibold transition-all duration-300 hover:border-amber-400/60 hover:scale-105"
-              >
-                {t("buttons.viewCaseStudies")}
-              </Button>
+              <Link href="/projects">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-2 border-amber-400/40 text-amber-400 hover:bg-amber-400/10 hover:text-white backdrop-blur-sm px-10 py-7 text-lg font-mono font-semibold transition-all duration-300 hover:border-amber-400/60 hover:scale-105"
+                >
+                  {t("buttons.viewCaseStudies")}
+                </Button>
+              </Link>
             </div>
 
             {/* Trust Indicators */}

@@ -22,6 +22,7 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { getProject, type Project } from '@/lib/projects';
 import { Header } from '../../components/Header';
 import { Footer } from '@/app/components/Footer';
+import { CTASection } from '@/app/components/CTASection';
 
 export default function ProjectPage() {
   const params = useParams();
@@ -375,6 +376,8 @@ export default function ProjectPage() {
           </div>
         </div>
       </div>
+
+      <CTASection variant="projects" />
 
       {/* Footer */}
       <Footer />

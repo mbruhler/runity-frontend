@@ -213,4 +213,17 @@
     animation: gradient-shift 15s ease infinite;
     background-size: 200% 200%;
   }
+
+  /* Force animations to play when navigating to sections */
+  .force-animate [class*="animate-"],
+  .force-animate [style*="animation"],
+  .force-animate .opacity-0 {
+    animation-play-state: running !important;
+    opacity: 1 !important;
+  }
+  
+  /* Override framer-motion's viewport detection */
+  .force-animate [style*="opacity: 0"] {
+    opacity: 1 !important;
+  }
 }

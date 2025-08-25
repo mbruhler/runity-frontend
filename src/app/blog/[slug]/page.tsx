@@ -12,6 +12,7 @@ import { ArrowLeft, Calendar, Clock, User, Share2 } from "lucide-react";
 import { Header } from "../../components/Header";
 import { getBlogPost, BlogPost } from "@/lib/blog";
 import { Footer } from "@/app/components/Footer";
+import { CTASection } from "@/app/components/CTASection";
 
 export default function BlogPostPage() {
   const params = useParams();
@@ -294,7 +295,7 @@ export default function BlogPostPage() {
           </motion.div>
         </div>
       </section>
-
+      <CTASection variant="blog" />
       {/* Footer */}
       <Footer />
     </div>

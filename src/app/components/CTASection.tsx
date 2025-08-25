@@ -2,8 +2,10 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { useTranslation } from "@/contexts/LanguageContext";
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
 interface CTASectionProps {
   variant?: "projects" | "blog" | "default";
@@ -11,6 +13,8 @@ interface CTASectionProps {
 
 export function CTASection({ variant = "default" }: CTASectionProps) {
   const { t } = useTranslation();
+  const router = useRouter();
+  const { scrollToSection } = useSmoothScroll();
 
   const getContent = () => {
     switch (variant) {
@@ -20,7 +24,7 @@ export function CTASection({ variant = "default" }: CTASectionProps) {
           subtitle: t("cta.projects.subtitle"),
           primaryButton: {
             text: t("cta.projects.primaryButton"),
-            href: "/contact"
+            href: "/#contact"
           },
           secondaryButton: {
             text: t("cta.projects.secondaryButton"),
@@ -33,7 +37,7 @@ export function CTASection({ variant = "default" }: CTASectionProps) {
           subtitle: t("cta.blog.subtitle"),
           primaryButton: {
             text: t("cta.blog.primaryButton"),
-            href: "/contact"
+            href: "/#contact"
           },
           secondaryButton: {
             text: t("cta.blog.secondaryButton"),
@@ -46,7 +50,7 @@ export function CTASection({ variant = "default" }: CTASectionProps) {
           subtitle: t("cta.default.subtitle"),
           primaryButton: {
             text: t("cta.default.primaryButton"),
-            href: "/contact"
+            href: "/#contact"
           },
           secondaryButton: {
             text: t("cta.default.secondaryButton"),
@@ -57,6 +61,20 @@ export function CTASection({ variant = "default" }: CTASectionProps) {
   };
 
   const content = getContent();
+
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (window.location.pathname !== '/' && href.startsWith('/#')) {
+      e.preventDefault();
+      router.push('/');
+      // Wait for page navigation and rendering
+      setTimeout(() => {
+        scrollToSection(href);
+      }, 500);
+    } else if (href.startsWith('/#')) {
+      e.preventDefault();
+      scrollToSection(href);
+    }
+  };
 
   return (
     <section className="py-20 bg-gray-50">
@@ -75,13 +93,19 @@ export function CTASection({ variant = "default" }: CTASectionProps) {
             {content.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href={content.primaryButton.href}>
+            <Link 
+              href={content.primaryButton.href}
+              onClick={(e) => handleNavigation(e, content.primaryButton.href)}
+            >
               <button className="bg-amber-500 hover:bg-amber-600 text-white font-mono font-semibold px-8 py-3 rounded-lg transition-colors">
                 {content.primaryButton.text}
                 <ArrowRight className="inline-block ml-2 h-5 w-5" />
               </button>
             </Link>
-            <Link href={content.secondaryButton.href}>
+            <Link 
+              href={content.secondaryButton.href}
+              onClick={(e) => handleNavigation(e, content.secondaryButton.href)}
+            >
               <button className="border border-amber-500 text-amber-600 hover:bg-amber-50 font-mono font-semibold px-8 py-3 rounded-lg transition-colors">
                 {content.secondaryButton.text}
               </button>
