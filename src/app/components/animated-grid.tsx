@@ -26,31 +26,24 @@ export function AnimatedGrid() {
     const waveAmplitude = 0;
     const waveSpeed = 0;
 
-    // Animation loop
-    let animationId: number;
-    const animate = () => {
+    // Draw static grid once
+    const drawGrid = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Draw animated grid
+      // Draw static grid
       const cols = Math.ceil(canvas.width / gridSize) + 1;
       const rows = Math.ceil(canvas.height / gridSize) + 1;
+
+      // Set static style
+      ctx.strokeStyle = `rgba(34, 211, 238, 0.03)`;
+      ctx.lineWidth = 1;
 
       for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
           const x = i * gridSize;
           const y = j * gridSize;
           
-          // Calculate wave effect
-          const distance = Math.sqrt(
-            Math.pow(x - canvas.width / 2, 2) + 
-            Math.pow(y - canvas.height / 2, 2)
-          );
-          const wave = Math.sin(distance * 0.003 - time) * waveAmplitude;
-          
-          // Draw grid lines with wave effect
-          ctx.strokeStyle = `rgba(34, 211, 238, ${0.03 + wave * 0.02})`;
-          ctx.lineWidth = 1;
-          
+          // Draw grid lines
           // Horizontal lines
           ctx.beginPath();
           ctx.moveTo(x - gridSize / 2, y);
@@ -65,23 +58,25 @@ export function AnimatedGrid() {
           
           // Draw intersection points
           if (i > 0 && j > 0) {
-            const pointOpacity = 0.1 + wave * 0.05;
-            ctx.fillStyle = `rgba(251, 191, 36, ${pointOpacity})`;
+            ctx.fillStyle = `rgba(251, 191, 36, 0.1)`;
             ctx.beginPath();
             ctx.arc(x, y, 1.5, 0, Math.PI * 2);
             ctx.fill();
           }
         }
       }
-
-      time += waveSpeed;
-      animationId = requestAnimationFrame(animate);
     };
-    animate();
+    drawGrid();
+
+    // Redraw on resize
+    const handleResize = () => {
+      resizeCanvas();
+      drawGrid();
+    };
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 

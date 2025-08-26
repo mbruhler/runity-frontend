@@ -128,7 +128,7 @@ export function ServicesSection() {
               variants={index % 3 === 0 ? fadeInLeft : index % 3 === 2 ? fadeInRight : fadeInUp}
             >
               <Card 
-                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-gray-200 h-full"
+                className="group hover:shadow-md transition-all duration-300 hover:-translate-y-2 border-gray-200 h-full"
               >
                 <CardHeader>
                   <div className="flex justify-center mb-4">

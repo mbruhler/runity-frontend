@@ -83,21 +83,20 @@ export function ReferencesCarousel() {
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: 60,
+              duration: 80,
               ease: "linear"
             }
           }}
-          style={{ width: "fit-content", transform: "perspective(1000px) rotateX(2deg)" }}
+          style={{ width: "fit-content", willChange: "transform" }}
         >
           {duplicatedCompanies.map((company, index) => (
             <motion.div
               key={`${company.id}-${index}`}
-              className="flex-shrink-0 bg-white border border-gray-200 rounded-lg h-20 flex items-center justify-center px-8 hover:shadow-xl transition-all duration-300 group"
+              className="flex-shrink-0 bg-white border border-gray-200 rounded-lg h-20 flex items-center justify-center px-8 hover:shadow-lg transition-shadow duration-300 group transform-gpu"
               style={{ minWidth: "280px" }}
               whileHover={{ 
-                y: -5,
-                scale: 1.05,
-                rotateY: 5,
+                y: -2,
+                scale: 1.02,
                 transition: { duration: 0.2 }
               }}
             >

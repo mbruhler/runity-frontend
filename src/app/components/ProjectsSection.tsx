@@ -100,7 +100,7 @@ export function ProjectsSection() {
             >
               <Link href={`/projects/${project.slug}`} className="block h-full">
                 <Card 
-                  className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-gray-200 h-full cursor-pointer flex flex-col"
+                  className="group hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1 border-gray-200 h-full cursor-pointer flex flex-col transform-gpu"
                 >
                   <CardHeader className="flex-grow">
                     <div className="flex items-start justify-between mb-4">

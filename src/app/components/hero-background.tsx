@@ -30,16 +30,16 @@ export function HeroBackground() {
       opacity: number;
     }> = [];
 
-    // Create particles
-    const particleCount = 50;
+    // Create particles - reduced count for better performance
+    const particleCount = 25;
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         size: Math.random() * 2 + 0.5,
-        speedX: (Math.random() - 0.5) * 0.3,
-        speedY: Math.random() * 0.5 + 0.1,
-        opacity: Math.random() * 0.5 + 0.2,
+        speedX: (Math.random() - 0.5) * 0.2,
+        speedY: Math.random() * 0.3 + 0.1,
+        opacity: Math.random() * 0.3 + 0.1,
       });
     }
 

@@ -161,7 +161,7 @@ export function Header() {
         <div
           className={`absolute inset-0 transition-all duration-500 ${
             isScrolled
-              ? "bg-black/80 backdrop-blur-xl"
+              ? "bg-black/80 backdrop-blur-md"
               : "bg-black/80"
           }`}
         />
@@ -283,7 +283,7 @@ export function Header() {
       >
         {/* Background overlay */}
         <div 
-          className="absolute inset-0 bg-black/95 backdrop-blur-xl"
+          className="absolute inset-0 bg-black/95 backdrop-blur-md"
           onClick={() => setIsMobileMenuOpen(false)}
         />
         
@@ -295,7 +295,7 @@ export function Header() {
               : "-translate-y-10 opacity-0"
           }`}
         >
-          <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6">
+          <div className="bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 p-6">
             <div className="space-y-2">
               {navItems.map((item, index) => (
                 <Link

@@ -251,7 +251,7 @@ export function HowWeWorkSection() {
                           {/* Glass morphism card */}
                           <div className={`
                             absolute inset-0 rounded-full 
-                            bg-white/10 backdrop-blur-md 
+                            bg-white/10 backdrop-blur-sm 
                             border border-white/20
                             ${completedSteps.has(index) ? 'opacity-100' : 'opacity-0'}
                             transition-opacity duration-500
@@ -261,7 +261,7 @@ export function HowWeWorkSection() {
                           <div className={`
                             relative bg-gradient-to-br ${step.gradient} 
                             rounded-full p-6 
-                            shadow-2xl ${activeStep === index ? step.activeGlow : step.glow}
+                            shadow-lg ${activeStep === index ? step.activeGlow : step.glow}
                             transition-all duration-300
                             ${completedSteps.has(index) ? 'ring-2 ring-white/50 ring-offset-2 ring-offset-transparent' : ''}
                           `}>
@@ -322,7 +322,7 @@ export function HowWeWorkSection() {
                     
                     {/* Enhanced Hover Content with glassmorphism */}
                     <HoverCardContent 
-                      className="w-80 bg-white/80 backdrop-blur-xl border-white/20 shadow-2xl" 
+                      className="w-80 bg-white/80 backdrop-blur-sm border-white/20 shadow-lg" 
                       align="center" 
                       side="bottom"
                     >
@@ -434,7 +434,7 @@ export function HowWeWorkSection() {
                     <div className={`
                       relative bg-gradient-to-br ${step.gradient} 
                       rounded-full p-3 
-                      shadow-xl ${activeStep === index ? step.activeGlow : step.glow}
+                      shadow-md ${activeStep === index ? step.activeGlow : step.glow}
                       ${completedSteps.has(index) ? 'ring-2 ring-white/50 ring-offset-2 ring-offset-transparent' : ''}
                       transition-all duration-300
                     `}>
@@ -451,7 +451,7 @@ export function HowWeWorkSection() {
                       relative p-4 rounded-xl cursor-pointer 
                       transition-all duration-300
                       ${activeStep === index 
-                        ? 'bg-white/90 shadow-xl scale-[1.02]' 
+                        ? 'bg-white/90 shadow-md scale-[1.02]' 
                         : 'bg-white/70 shadow-md hover:shadow-lg hover:bg-white/80'
                       }
                       backdrop-blur-sm border border-white/20
@@ -551,7 +551,7 @@ export function HowWeWorkSection() {
             {t("process.ctaText")}
           </p>
           <motion.button
-            className="px-8 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-sans font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+            className="px-8 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-sans font-semibold rounded-lg shadow-lg hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection('/#contact')}
