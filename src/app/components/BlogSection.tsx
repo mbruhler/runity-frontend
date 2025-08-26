@@ -20,7 +20,7 @@ const fadeInUp = {
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 0.7,
+      duration: 0.5,
       ease: "easeOut" as const
     }
   }
@@ -63,8 +63,8 @@ export function BlogSection() {
           className="text-3xl font-sans font-bold text-center text-gray-900 mb-12"
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           {t("blog.title")}
         </motion.h2>
@@ -84,7 +84,7 @@ export function BlogSection() {
             variants={staggerContainer}
             initial="initial"
             whileInView="whileInView"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             {blogPosts.map((post) => (
               <motion.div
@@ -140,7 +140,7 @@ export function BlogSection() {
               ease: [0.43, 0.13, 0.23, 0.96]
             }
           }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           <Link href="/blog">
             <Button variant="outline" size="lg" className="font-mono">

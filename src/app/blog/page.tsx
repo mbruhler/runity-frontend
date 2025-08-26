@@ -10,6 +10,7 @@ import { Header } from "../components/Header";
 import { getBlogPosts, BlogPost } from "@/lib/blog";
 import { CTASection } from "../components/CTASection";
 import { Footer } from "../components/Footer";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 // Animation variants
 const fadeInUp = {
@@ -30,7 +31,7 @@ const staggerContainer = {
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const { t } = useTranslation();
   useEffect(() => {
     async function fetchPosts() {
       try {
@@ -71,11 +72,10 @@ export default function BlogPage() {
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-bold text-gray-900 mb-6">
-              Insights & Resources
+              {t("blogPage.title")}
             </h1>
             <p className="text-xl font-mono text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Explore our latest thoughts on AI automation, industry trends, and practical guides 
-              to help transform your business with intelligent solutions.
+              {t("blogPage.subtitle")}
             </p>
           </motion.div>
         </div>

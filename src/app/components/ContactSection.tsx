@@ -91,8 +91,8 @@ export function ContactSection() {
             className="text-center mb-12"
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             <h2 className="text-3xl font-sans font-bold text-gray-900 mb-4">
               {t("contact.title")}
@@ -119,7 +119,7 @@ export function ContactSection() {
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             <Card className="shadow-lg">
               <CardContent className="p-8">

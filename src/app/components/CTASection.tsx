@@ -83,8 +83,8 @@ export function CTASection({ variant = "default" }: CTASectionProps) {
           className="text-center max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           <h2 className="text-3xl font-sans font-bold text-gray-900 mb-4">
             {content.title}

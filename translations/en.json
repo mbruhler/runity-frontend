@@ -233,6 +233,26 @@
       "primaryButton": "Get Started Today",
       "secondaryButton": "View Our Work"
     },
+    "blogPage": {
+      "title": "Insights & Resources",
+      "subtitle": "Explore our latest AI automation insights and resources",
+      "viewAllPosts": "View All Posts",
+      "readMore": "Read more",
+      "backButton": "Back to Blog",
+      "shareButton": "Share",
+      "notFound": {
+        "title": "Blog Post Not Found",
+        "subtitle": "The blog post you're looking for doesn't exist or has been moved.",
+        "button": "Back to Blog"
+      }
+    },
+    "projectPage": {
+      "notFound": {
+        "title": "Project Not Found",
+        "subtitle": "The project you're looking for doesn't exist or has been moved.",
+        "button": "Back to Projects"
+      }
+    },
     "default": {
       "title": "Ready to Get Started?",
       "subtitle": "Let's work together to build intelligent automation solutions for your business.",

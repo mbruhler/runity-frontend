@@ -145,6 +145,26 @@
     "viewAllPosts": "Zobacz wszystkie artykuły",
     "readMore": "Czytaj więcej"
   },
+  "blogPage": {
+    "title": "Wiedza i Zasoby",
+    "subtitle": "Odkryj nasze najnowsze artykuły i zasoby",
+    "viewAllPosts": "Zobacz wszystkie artykuły",
+    "readMore": "Czytaj więcej",
+    "backButton": "Powrót do bloga",
+    "shareButton": "Udostępnij",
+    "notFound": {
+      "title": "Artykuł nie znaleziony",
+      "subtitle": "Artykuł, którego szukasz, nie istnieje lub został przeniesiony.",
+      "button": "Powrót do bloga"
+    }
+  },
+  "projectPage": {
+    "notFound": {
+      "title": "Projekt nie został znaleziony",
+      "subtitle": "Projekt, którego szukasz, nie istnieje lub został przeniesiony.",
+      "button": "Wróć do projektów"
+    }
+  },
   "contact": {
     "title": "Stwórzmy razem coś wyjątkowego",
     "subtitle": "Opowiedz nam o swoim projekcie – odpowiemy w ciągu 24 godzin.",

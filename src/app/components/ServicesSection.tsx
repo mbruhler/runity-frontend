@@ -15,7 +15,7 @@ const fadeInUp = {
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 0.7,
+      duration: 0.5,
       ease: "easeOut" as const
     }
   }
@@ -110,8 +110,8 @@ export function ServicesSection() {
           className="text-3xl font-sans font-bold text-center text-gray-900 mb-12"
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           {t("services.title")}
         </motion.h2>
@@ -120,7 +120,7 @@ export function ServicesSection() {
           variants={staggerContainer}
           initial="initial"
           whileInView="whileInView"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           {services.map((service, index) => (
             <motion.div

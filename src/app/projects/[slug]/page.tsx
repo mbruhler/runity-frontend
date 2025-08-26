@@ -31,13 +31,14 @@ export default function ProjectPage() {
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     async function fetchProject() {
       if (typeof params.slug === 'string') {
         const fetchedProject = await getProject(params.slug);
         if (!fetchedProject) {
-          router.push('/projects');
+          setNotFound(true);
         } else {
           setProject(fetchedProject);
         }
@@ -45,7 +46,7 @@ export default function ProjectPage() {
       setLoading(false);
     }
     fetchProject();
-  }, [params.slug, router]);
+  }, [params.slug]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -69,8 +70,46 @@ export default function ProjectPage() {
     );
   }
 
-  if (!project) {
-    return null;
+  if (notFound || !project) {
+    return (
+      <div className="min-h-screen bg-white">
+        <Header />
+        <div className="pt-32 pb-12 text-center">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.h1 
+              className="text-4xl font-sans font-bold text-gray-900 mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              {t("projectPage.notFound.title") || "Project Not Found"}
+            </motion.h1>
+            <motion.p 
+              className="text-lg font-mono text-gray-600 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              {t("projectPage.notFound.subtitle") || "The project you're looking for doesn't exist or has been moved."}
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Link 
+                href="/projects"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-mono rounded-lg transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                {t("projectPage.notFound.button") || "Back to Projects"}
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
   }
 
   return (

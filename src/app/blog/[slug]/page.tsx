@@ -13,7 +13,7 @@ import { Header } from "../../components/Header";
 import { getBlogPost, BlogPost } from "@/lib/blog";
 import { Footer } from "@/app/components/Footer";
 import { CTASection } from "@/app/components/CTASection";
-
+import { useTranslation } from "@/contexts/LanguageContext";
 export default function BlogPostPage() {
   const params = useParams();
   const [post, setPost] = useState<BlogPost | null>(null);
@@ -21,7 +21,7 @@ export default function BlogPostPage() {
   const [notFound, setNotFound] = useState(false);
 
   const slug = params.slug as string;
-
+  const { t } = useTranslation();
   useEffect(() => {
     async function fetchPost() {
       try {
@@ -74,15 +74,15 @@ export default function BlogPostPage() {
         <div className="pt-32 pb-12 text-center">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl font-sans font-bold text-gray-900 mb-4">
-              Blog Post Not Found
+              {t("blogPage.notFound.title")}
             </h1>
             <p className="text-lg font-mono text-gray-600 mb-8">
-              The blog post you&apos;re looking for doesn&apos;t exist or has been moved.
+              {t("blogPage.notFound.subtitle")}
             </p>
             <Link href="/blog">
               <Button className="bg-amber-500 hover:bg-amber-600 text-white font-mono">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Blog
+                {t("blogPage.notFound.button")}
               </Button>
             </Link>
           </div>
@@ -112,7 +112,7 @@ export default function BlogPostPage() {
                   className="font-mono text-gray-600 hover:text-amber-600 p-0"
                 >
                   <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Blog
+                  {t("blogPage.backButton")}
                 </Button>
               </Link>
             </div>
@@ -152,7 +152,7 @@ export default function BlogPostPage() {
                   className="flex items-center gap-2 hover:text-amber-600 transition-colors"
                 >
                   <Share2 className="w-4 h-4" />
-                  Share
+                  {t("blogPage.shareButton")}
                 </button>
               </div>
             </div>

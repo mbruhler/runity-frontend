@@ -10,7 +10,8 @@ import {
   Wrench, 
   Trophy,
   Info,
-  ChevronDown
+  ChevronDown,
+  CheckCircle
 } from "lucide-react";
 import { useTranslation } from "@/contexts/LanguageContext";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
@@ -162,7 +163,7 @@ export function HowWeWorkSection() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           <h2 className="text-3xl sm:text-4xl font-sans font-bold text-gray-900 mb-4">
             {t("process.title")}
@@ -228,7 +229,7 @@ export function HowWeWorkSection() {
             variants={staggerContainer}
             initial="initial"
             whileInView="whileInView"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             {steps.map((step, index) => {
               const Icon = step.icon;
@@ -345,7 +346,7 @@ export function HowWeWorkSection() {
                                   key={idx}
                                   className="inline-flex items-start gap-2 text-xs"
                                 >
-                                 
+                                 <CheckCircle className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" />
                                   <span className="font-mono text-gray-600">{highlight}</span>
                                 </div>
                               ))}
@@ -412,7 +413,7 @@ export function HowWeWorkSection() {
             variants={staggerContainer}
             initial="initial"
             whileInView="whileInView"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.05 }}
           >
             {steps.map((step, index) => {
             const Icon = step.icon;
@@ -515,7 +516,8 @@ export function HowWeWorkSection() {
                             key={idx}
                             className="inline-flex items-center gap-1 px-2 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-mono"
                           >
-                            <span className="w-3 h-3 bg-amber-500 rounded-full flex-shrink-0" />
+                                 <CheckCircle className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" />
+
                             {highlight}
                           </span>
                         ))}
@@ -543,7 +545,7 @@ export function HowWeWorkSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           <p className="text-lg font-mono text-gray-600 mb-6">
             {t("process.ctaText")}

@@ -53,12 +53,33 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
       return null;
     }
     
-    const markdown = await response.text();
-    const { data, content } = matter(markdown);
+    // Check if the response is actually a markdown file
+    const contentType = response.headers.get('content-type');
+    const text = await response.text();
+    
+    // If the response is HTML (like a 404 page), return null
+    if (contentType?.includes('text/html') || text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
+      console.error(`Blog post ${slug} returned HTML instead of markdown`);
+      return null;
+    }
+    
+    // Check if the text looks like a valid markdown file with frontmatter
+    if (!text.trim().startsWith('---')) {
+      console.error(`Blog post ${slug} doesn't appear to be a valid markdown file with frontmatter`);
+      return null;
+    }
+    
+    const { data, content } = matter(text);
+    
+    // Validate that we have at least a title
+    if (!data.title) {
+      console.error(`Blog post ${slug} is missing required title`);
+      return null;
+    }
     
     return {
       slug,
-      title: data.title || 'Untitled',
+      title: data.title,
       date: data.date || '',
       readTime: data.readTime || '5 min read',
       category: data.category || 'General',

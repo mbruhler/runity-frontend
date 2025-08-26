@@ -20,7 +20,7 @@ const fadeInUp = {
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 0.7,
+      duration: 0.5,
       ease: "easeOut" as const
     }
   }
@@ -80,8 +80,8 @@ export function ProjectsSection() {
           className="text-3xl font-sans font-bold text-center text-gray-900 mb-12"
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           {t("projects.title")}
         </motion.h2>
@@ -90,7 +90,7 @@ export function ProjectsSection() {
           variants={staggerContainer}
           initial="initial"
           whileInView="whileInView"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           {projects.map((project, index) => (
             <motion.div
@@ -158,8 +158,8 @@ export function ProjectsSection() {
           className="text-center mt-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           <Link href="/projects">
             <Button 

@@ -85,7 +85,7 @@ function Counter({ end, duration = 2500, suffix = "", prefix = "" }: { end: numb
     <motion.div
       variants={counterVariant}
       onViewportEnter={() => setHasStarted(true)}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.05 }}
       className="inline-flex items-center justify-center font-sans font-bold text-4xl lg:text-5xl"
     >
       <span className="text-amber-500">{prefix}</span>
@@ -304,7 +304,7 @@ export function TrustSection() {
           variants={staggerContainer}
           initial="initial"
           whileInView="whileInView"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.05 }}
         >
           {/* Main headline with compelling trust message */}
           <motion.h2 
