@@ -276,7 +276,7 @@ export function HowWeWorkSection() {
                             key={idx}
                             className="inline-flex items-center gap-1 px-2 py-1 bg-amber-50 text-amber-700 rounded-full text-xs font-mono"
                           >
-                            <CheckCircle className="w-3 h-3" />
+                            <span className="w-3 h-3 bg-amber-500 rounded-full flex-shrink-0" />
                             {highlight}
                           </span>
                         ))}
