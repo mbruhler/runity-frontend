@@ -33,17 +33,27 @@ export interface Project {
   solutions: string[];
   results: string[];
   content: string;
+  language?: string;
 }
 
-export async function getProjects(): Promise<Project[]> {
+export async function getProjects(language: string = 'en'): Promise<Project[]> {
   try {
     // Get list of project files from the public/projects directory
     const response = await fetch('/api/projects');
     const files: string[] = await response.json();
     
+    // Filter files by language or fallback to language-neutral files
+    const languageFiles = files.filter(filename => {
+      if (filename.includes(`.${language}.md`)) return true;
+      // Include files without language suffix as fallback
+      if (!filename.includes('.en.md') && !filename.includes('.pl.md') && filename.endsWith('.md')) return true;
+      return false;
+    });
+    
     const projects = await Promise.all(
-      files.map(async (filename) => {
-        const slug = filename.replace('.md', '');
+      languageFiles.map(async (filename) => {
+        // Extract slug (remove language suffix and .md extension)
+        const slug = filename.replace(`.${language}.md`, '').replace('.md', '');
         const fileResponse = await fetch(`/projects/${filename}`);
         const markdown = await fileResponse.text();
         
@@ -62,7 +72,8 @@ export async function getProjects(): Promise<Project[]> {
           challenges: data.challenges || [],
           solutions: data.solutions || [],
           results: data.results || [],
-          content
+          content,
+          language: filename.includes(`.${language}.md`) ? language : undefined
         } as Project;
       })
     );
@@ -75,59 +86,72 @@ export async function getProjects(): Promise<Project[]> {
   }
 }
 
-export async function getProject(slug: string): Promise<Project | null> {
+export async function getProject(slug: string, language: string = 'en'): Promise<Project | null> {
   try {
-    const response = await fetch(`/projects/${slug}.md`);
-    if (!response.ok) {
-      return null;
+    // Try to fetch language-specific file first, then fallback to neutral file
+    const filenames = [`${slug}.${language}.md`, `${slug}.md`];
+    
+    for (const filename of filenames) {
+      try {
+        const response = await fetch(`/projects/${filename}`);
+        if (!response.ok) {
+          continue; // Try next filename
+        }
+        
+        // Check if the response is actually a markdown file
+        const contentType = response.headers.get('content-type');
+        const text = await response.text();
+        
+        // If the response is HTML (like a 404 page), continue to next filename
+        if (contentType?.includes('text/html') || text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
+          console.error(`Project ${filename} returned HTML instead of markdown`);
+          continue;
+        }
+        
+        // Check if the text looks like a valid markdown file with frontmatter
+        if (!text.trim().startsWith('---')) {
+          console.error(`Project ${filename} doesn't appear to be a valid markdown file with frontmatter`);
+          continue;
+        }
+        
+        const { data, content } = matter(text);
+        
+        // Validate that we have at least a title
+        if (!data.title) {
+          console.error(`Project ${filename} is missing required title`);
+          continue;
+        }
+        
+        return {
+          slug,
+          title: data.title,
+          description: data.description || '',
+          client: data.client || '',
+          duration: data.duration || '',
+          date: data.date || '',
+          techStack: data.techStack || [],
+          image: data.image || '/api/placeholder/800/400',
+          stats: data.stats || {},
+          challenges: data.challenges || [],
+          solutions: data.solutions || [],
+          results: data.results || [],
+          content,
+          language: filename.includes(`.${language}.md`) ? language : undefined
+        } as Project;
+      } catch (error) {
+        console.error(`Error fetching ${filename}:`, error);
+        continue;
+      }
     }
     
-    // Check if the response is actually a markdown file
-    const contentType = response.headers.get('content-type');
-    const text = await response.text();
-    
-    // If the response is HTML (like a 404 page), return null
-    if (contentType?.includes('text/html') || text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
-      console.error(`Project ${slug} returned HTML instead of markdown`);
-      return null;
-    }
-    
-    // Check if the text looks like a valid markdown file with frontmatter
-    if (!text.trim().startsWith('---')) {
-      console.error(`Project ${slug} doesn't appear to be a valid markdown file with frontmatter`);
-      return null;
-    }
-    
-    const { data, content } = matter(text);
-    
-    // Validate that we have at least a title
-    if (!data.title) {
-      console.error(`Project ${slug} is missing required title`);
-      return null;
-    }
-    
-    return {
-      slug,
-      title: data.title,
-      description: data.description || '',
-      client: data.client || '',
-      duration: data.duration || '',
-      date: data.date || '',
-      techStack: data.techStack || [],
-      image: data.image || '/api/placeholder/800/400',
-      stats: data.stats || {},
-      challenges: data.challenges || [],
-      solutions: data.solutions || [],
-      results: data.results || [],
-      content
-    } as Project;
+    return null;
   } catch (error) {
     console.error('Error fetching project:', error);
     return null;
   }
 }
 
-export async function getLatestProjects(count: number = 3): Promise<Project[]> {
-  const projects = await getProjects();
+export async function getLatestProjects(count: number = 3, language: string = 'en'): Promise<Project[]> {
+  const projects = await getProjects(language);
   return projects.slice(0, count);
 }

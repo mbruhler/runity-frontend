@@ -31,11 +31,11 @@ const staggerContainer = {
 export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const blogPosts = await getBlogPosts();
+        const blogPosts = await getBlogPosts(language);
         setPosts(blogPosts);
       } catch (error) {
         console.error('Error fetching blog posts:', error);
@@ -45,7 +45,7 @@ export default function BlogPage() {
     }
 
     fetchPosts();
-  }, []);
+  }, [language]);
 
   if (loading) {
     return (

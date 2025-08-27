@@ -9,17 +9,27 @@ export interface BlogPost {
   excerpt: string;
   author: string;
   content: string;
+  language?: string;
 }
 
-export async function getBlogPosts(): Promise<BlogPost[]> {
+export async function getBlogPosts(language: string = 'en'): Promise<BlogPost[]> {
   try {
     // Get list of blog files from the public/blog directory
     const response = await fetch('/api/blog');
     const files: string[] = await response.json();
     
+    // Filter files by language or fallback to language-neutral files
+    const languageFiles = files.filter(filename => {
+      if (filename.includes(`.${language}.md`)) return true;
+      // Include files without language suffix as fallback
+      if (!filename.includes('.en.md') && !filename.includes('.pl.md') && filename.endsWith('.md')) return true;
+      return false;
+    });
+    
     const posts = await Promise.all(
-      files.map(async (filename) => {
-        const slug = filename.replace('.md', '');
+      languageFiles.map(async (filename) => {
+        // Extract slug (remove language suffix and .md extension)
+        const slug = filename.replace(`.${language}.md`, '').replace('.md', '');
         const fileResponse = await fetch(`/blog/${filename}`);
         const markdown = await fileResponse.text();
         
@@ -33,7 +43,8 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
           category: data.category || 'General',
           excerpt: data.excerpt || '',
           author: data.author || 'Runity Team',
-          content
+          content,
+          language: filename.includes(`.${language}.md`) ? language : undefined
         } as BlogPost;
       })
     );
@@ -46,47 +57,60 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
   }
 }
 
-export async function getBlogPost(slug: string): Promise<BlogPost | null> {
+export async function getBlogPost(slug: string, language: string = 'en'): Promise<BlogPost | null> {
   try {
-    const response = await fetch(`/blog/${slug}.md`);
-    if (!response.ok) {
-      return null;
+    // Try to fetch language-specific file first, then fallback to neutral file
+    const filenames = [`${slug}.${language}.md`, `${slug}.md`];
+    
+    for (const filename of filenames) {
+      try {
+        const response = await fetch(`/blog/${filename}`);
+        if (!response.ok) {
+          continue; // Try next filename
+        }
+        
+        // Check if the response is actually a markdown file
+        const contentType = response.headers.get('content-type');
+        const text = await response.text();
+        
+        // If the response is HTML (like a 404 page), continue to next filename
+        if (contentType?.includes('text/html') || text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
+          console.error(`Blog post ${filename} returned HTML instead of markdown`);
+          continue;
+        }
+        
+        // Check if the text looks like a valid markdown file with frontmatter
+        if (!text.trim().startsWith('---')) {
+          console.error(`Blog post ${filename} doesn't appear to be a valid markdown file with frontmatter`);
+          continue;
+        }
+        
+        const { data, content } = matter(text);
+        
+        // Validate that we have at least a title
+        if (!data.title) {
+          console.error(`Blog post ${filename} is missing required title`);
+          continue;
+        }
+        
+        return {
+          slug,
+          title: data.title,
+          date: data.date || '',
+          readTime: data.readTime || '5 min read',
+          category: data.category || 'General',
+          excerpt: data.excerpt || '',
+          author: data.author || 'Runity Team',
+          content,
+          language: filename.includes(`.${language}.md`) ? language : undefined
+        } as BlogPost;
+      } catch (error) {
+        console.error(`Error fetching ${filename}:`, error);
+        continue;
+      }
     }
     
-    // Check if the response is actually a markdown file
-    const contentType = response.headers.get('content-type');
-    const text = await response.text();
-    
-    // If the response is HTML (like a 404 page), return null
-    if (contentType?.includes('text/html') || text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
-      console.error(`Blog post ${slug} returned HTML instead of markdown`);
-      return null;
-    }
-    
-    // Check if the text looks like a valid markdown file with frontmatter
-    if (!text.trim().startsWith('---')) {
-      console.error(`Blog post ${slug} doesn't appear to be a valid markdown file with frontmatter`);
-      return null;
-    }
-    
-    const { data, content } = matter(text);
-    
-    // Validate that we have at least a title
-    if (!data.title) {
-      console.error(`Blog post ${slug} is missing required title`);
-      return null;
-    }
-    
-    return {
-      slug,
-      title: data.title,
-      date: data.date || '',
-      readTime: data.readTime || '5 min read',
-      category: data.category || 'General',
-      excerpt: data.excerpt || '',
-      author: data.author || 'Runity Team',
-      content
-    } as BlogPost;
+    return null;
   } catch (error) {
     console.error('Error fetching blog post:', error);
     return null;

@@ -10,45 +10,21 @@ import { ArrowRight, Code2, Clock, Users } from "lucide-react";
 import { useTranslation } from "@/contexts/LanguageContext";
 import { getLatestProjects, type Project } from "@/lib/projects";
 
-// Animation Variants
-const fadeInUp = {
-  initial: { 
-    opacity: 0, 
-    y: 60 
-  },
-  whileInView: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as const
-    }
-  }
-};
-
-const staggerContainer = {
-  initial: {},
-  whileInView: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1
-    }
-  }
-};
+// Animation Variants (removed unused animations)
 
 export function ProjectsSection() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProjects() {
-      const latestProjects = await getLatestProjects(3);
+      const latestProjects = await getLatestProjects(3, language);
       setProjects(latestProjects);
       setLoading(false);
     }
     fetchProjects();
-  }, []);
+  }, [language]);
   if (loading) {
     return (
       <section id="projects" className="py-20 bg-gray-50">
@@ -85,18 +61,16 @@ export function ProjectsSection() {
         >
           {t("projects.title")}
         </motion.h2>
-        <motion.div 
+        <div 
           className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="whileInView"
-          viewport={{ once: true, amount: 0.05 }}
         >
-          {projects.map((project, index) => (
+          {projects.filter(project => project.language === language).map((project, index) => (
             <motion.div
-              key={project.slug}
-              variants={fadeInUp}
-              custom={index}
+              key={project.slug + project.language}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              viewport={{ once: true, amount: 0.5 }}
             >
               <Link href={`/projects/${project.slug}`} className="block h-full">
                 <Card 
@@ -151,7 +125,7 @@ export function ProjectsSection() {
               </Link>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
         
         {/* View All Projects Button */}
         <motion.div 

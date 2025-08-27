@@ -10,41 +10,17 @@ import { BookOpen, ArrowRight } from "lucide-react";
 import { getBlogPosts, BlogPost } from "@/lib/blog";
 import { useTranslation } from "@/contexts/LanguageContext";
 
-// Animation Variants
-const fadeInUp = {
-  initial: { 
-    opacity: 0, 
-    y: 60 
-  },
-  whileInView: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as const
-    }
-  }
-};
-
-const staggerContainer = {
-  initial: {},
-  whileInView: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1
-    }
-  }
-};
+// Animation Variants (removed unused animations)
 
 export function BlogSection() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [blogLoading, setBlogLoading] = useState(true);
 
   useEffect(() => {
     async function fetchBlogPosts() {
       try {
-        const posts = await getBlogPosts();
+        const posts = await getBlogPosts(language);
         setBlogPosts(posts.slice(0, 3)); // Get only the first 3 posts for home page
       } catch (error) {
         console.error('Error fetching blog posts:', error);
@@ -54,7 +30,7 @@ export function BlogSection() {
     }
 
     fetchBlogPosts();
-  }, []);
+  }, [language]);
 
   return (
     <section id="blog" className="py-20 bg-white">
@@ -79,18 +55,17 @@ export function BlogSection() {
             <p className="text-gray-600 font-mono">{t("blog.noPostsSubtext")}</p>
           </div>
         ) : (
-          <motion.div 
+          <div 
             className="grid md:grid-cols-3 gap-4 max-w-6xl mx-auto"
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={{ once: true, amount: 0.05 }}
           >
-            {blogPosts.map((post) => (
+            {blogPosts.map((post, index) => (
               <motion.div
                 key={post.slug}
-                variants={fadeInUp}
                 className="h-full"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.5 }}
               >
                 <Link href={`/blog/${post.slug}`} className="block h-full">
                   <Card 
@@ -127,20 +102,14 @@ export function BlogSection() {
                 </Link>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         )}
         <motion.div 
           className="text-center mt-12"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ 
-            opacity: 1, 
-            scale: 1,
-            transition: {
-              duration: 0.6,
-              ease: [0.43, 0.13, 0.23, 0.96]
-            }
-          }}
-          viewport={{ once: true, amount: 0.05 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true, amount: 0.5 }}
         >
           <Link href="/blog">
             <Button variant="outline" size="lg" className="font-mono">

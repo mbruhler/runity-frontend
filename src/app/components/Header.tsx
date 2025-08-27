@@ -12,12 +12,15 @@ import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [activeSection, setActiveSection] = useState("");
   const [animationKey, setAnimationKey] = useState(0);
   const [isLanguageChanging, setIsLanguageChanging] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    // Mark component as mounted to prevent hydration mismatch
+    setIsMounted(true);
     // Trigger initial animation
     setIsVisible(true);
 
@@ -202,7 +205,7 @@ export function Header() {
                       : "text-gray-300 hover:text-white"
                   } ${isLanguageChanging ? 'transition-opacity duration-100' : ''}`}
                   style={{
-                    animation: isVisible && !isLanguageChanging
+                    animation: isMounted && isVisible && !isLanguageChanging
                       ? `fadeInDown 0.5s ease-out ${index * 0.1 + 0.3}s both` 
                       : "",
                     opacity: isLanguageChanging ? 0 : 1,
@@ -229,7 +232,7 @@ export function Header() {
             <div className="hidden md:flex items-center gap-3">
               <div
                 style={{
-                  animation: isVisible ? "fadeInDown 0.5s ease-out 0.7s both" : "",
+                  animation: isMounted && isVisible ? "fadeInDown 0.5s ease-out 0.7s both" : "",
                 }}
               >
                 <LanguageSwitcher />
@@ -237,7 +240,7 @@ export function Header() {
               
               <div 
                 style={{
-                  animation: isVisible ? "fadeInDown 0.5s ease-out 0.8s both" : "",
+                  animation: isMounted && isVisible ? "fadeInDown 0.5s ease-out 0.8s both" : "",
                 }}
               >
                 <Button

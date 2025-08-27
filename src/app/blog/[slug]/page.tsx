@@ -21,11 +21,11 @@ export default function BlogPostPage() {
   const [notFound, setNotFound] = useState(false);
 
   const slug = params.slug as string;
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   useEffect(() => {
     async function fetchPost() {
       try {
-        const blogPost = await getBlogPost(slug);
+        const blogPost = await getBlogPost(slug, language);
         if (blogPost) {
           setPost(blogPost);
         } else {
@@ -42,7 +42,7 @@ export default function BlogPostPage() {
     if (slug) {
       fetchPost();
     }
-  }, [slug]);
+  }, [slug, language]);
 
   const handleShare = () => {
     if (navigator.share && post) {

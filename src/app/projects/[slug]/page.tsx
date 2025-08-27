@@ -27,7 +27,7 @@ import { CTASection } from '@/app/components/CTASection';
 export default function ProjectPage() {
   const params = useParams();
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
@@ -36,7 +36,7 @@ export default function ProjectPage() {
   useEffect(() => {
     async function fetchProject() {
       if (typeof params.slug === 'string') {
-        const fetchedProject = await getProject(params.slug);
+        const fetchedProject = await getProject(params.slug, language);
         if (!fetchedProject) {
           setNotFound(true);
         } else {
@@ -46,7 +46,7 @@ export default function ProjectPage() {
       setLoading(false);
     }
     fetchProject();
-  }, [params.slug]);
+  }, [params.slug, language]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

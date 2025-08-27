@@ -12,18 +12,18 @@ import { Footer } from '../components/Footer';
 import { CTASection } from '../components/CTASection';
 
 export default function ProjectsPage() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProjects() {
-      const fetchedProjects = await getProjects();
+      const fetchedProjects = await getProjects(language);
       setProjects(fetchedProjects);
       setLoading(false);
     }
     fetchProjects();
-  }, []);
+  }, [language]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
