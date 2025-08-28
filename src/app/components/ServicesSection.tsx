@@ -5,62 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { CheckCircle, Zap, Cpu, Shield, Smartphone, Terminal, Globe } from "lucide-react";
 import { useTranslation } from "@/contexts/LanguageContext";
 
-// Animation Variants for Services
-const fadeInUp = {
-  initial: { 
-    opacity: 0, 
-    y: 60 
-  },
-  whileInView: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as const
-    }
-  }
-};
-
-const fadeInLeft = {
-  initial: { 
-    opacity: 0, 
-    x: -60 
-  },
-  whileInView: { 
-    opacity: 1, 
-    x: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut" as const
-    }
-  }
-};
-
-const fadeInRight = {
-  initial: { 
-    opacity: 0, 
-    x: 60 
-  },
-  whileInView: { 
-    opacity: 1, 
-    x: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut" as const
-    }
-  }
-};
-
-const staggerContainer = {
-  initial: {},
-  whileInView: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1
-    }
-  }
-};
-
 export function ServicesSection() {
   const { t, tArray } = useTranslation();
   

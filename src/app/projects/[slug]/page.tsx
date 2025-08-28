@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 import Link from 'next/link';
@@ -26,7 +26,6 @@ import { CTASection } from '@/app/components/CTASection';
 
 export default function ProjectPage() {
   const params = useParams();
-  const router = useRouter();
   const { t, language } = useTranslation();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);

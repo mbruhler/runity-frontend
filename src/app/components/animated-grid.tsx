@@ -21,10 +21,7 @@ export function AnimatedGrid() {
     window.addEventListener("resize", resizeCanvas);
 
     // Grid animation parameters
-    let time = 0;
     const gridSize = 80;
-    const waveAmplitude = 0;
-    const waveSpeed = 0;
 
     // Draw static grid once
     const drawGrid = () => {
