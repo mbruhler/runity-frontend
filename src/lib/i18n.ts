@@ -81,11 +81,11 @@ export function useLanguage() {
   };
   
   const t = (path: string): string | string[] => {
-    return getTranslation(translations[language], path);
+    return getTranslation(translations[language] as any, path);
   };
   
   const tArray = (path: string): string[] => {
-    const result = getTranslation(translations[language], path);
+    const result = getTranslation(translations[language] as any, path);
     return Array.isArray(result) ? result : [result as string];
   };
   
