@@ -220,6 +220,19 @@
     "ctaText": "Ready to transform your business with AI?",
     "ctaButton": "Start Your Journey Today"
   },
+  "blogPage": {
+      "title": "Insights & Resources",
+      "subtitle": "Explore our latest AI automation insights and resources",
+      "viewAllPosts": "View All Posts",
+      "readMore": "Read more",
+      "backButton": "Back to Blog",
+      "shareButton": "Share",
+      "notFound": {
+        "title": "Blog Post Not Found",
+        "subtitle": "The blog post you're looking for doesn't exist or has been moved.",
+        "button": "Back to Blog"
+      }
+    },
   "cta": {
     "projects": {
       "title": "Ready to Start Your Project?",
@@ -232,19 +245,6 @@
       "subtitle": "Our team of AI automation experts is here to help you implement the solutions discussed in our blog posts.",
       "primaryButton": "Get Started Today",
       "secondaryButton": "View Our Work"
-    },
-    "blogPage": {
-      "title": "Insights & Resources",
-      "subtitle": "Explore our latest AI automation insights and resources",
-      "viewAllPosts": "View All Posts",
-      "readMore": "Read more",
-      "backButton": "Back to Blog",
-      "shareButton": "Share",
-      "notFound": {
-        "title": "Blog Post Not Found",
-        "subtitle": "The blog post you're looking for doesn't exist or has been moved.",
-        "button": "Back to Blog"
-      }
     },
     "projectPage": {
       "notFound": {
