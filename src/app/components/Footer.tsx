@@ -30,7 +30,7 @@ export function Footer() {
                 e.preventDefault();
                 track('Footer Link Click', {
                   link_type: 'privacy-policy',
-                  link_text: t("footer.privacyPolicy")
+                  link_text: String(t("footer.privacyPolicy"))
                 });
               }}
             >
@@ -43,7 +43,7 @@ export function Footer() {
                 e.preventDefault();
                 track('Footer Link Click', {
                   link_type: 'terms-of-service',
-                  link_text: t("footer.termsOfService")
+                  link_text: String(t("footer.termsOfService"))
                 });
               }}
             >
@@ -56,7 +56,7 @@ export function Footer() {
                 e.preventDefault();
                 track('Footer Link Click', {
                   link_type: 'contact',
-                  link_text: t("footer.contact")
+                  link_text: String(t("footer.contact"))
                 });
               }}
             >

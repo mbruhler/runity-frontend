@@ -60,7 +60,7 @@ export function ContactSection() {
     
     if (!validateForm()) {
       track('Contact Form Validation Error', {
-        errors: Object.keys(formErrors),
+        errors: Object.keys(formErrors).join(','),
         error_count: Object.keys(formErrors).length
       });
       return;
