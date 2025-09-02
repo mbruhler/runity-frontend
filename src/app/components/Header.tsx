@@ -129,8 +129,8 @@ export function Header() {
 
   // Determine if a nav item is active
   const isNavItemActive = (item: typeof navItems[0]) => {
-    // Only run on client side
-    if (typeof window === 'undefined') return false;
+    // Only run on client side after component is mounted
+    if (!isMounted || typeof window === 'undefined') return false;
     
     const currentPath = window.location.pathname;
     
@@ -175,6 +175,8 @@ export function Header() {
             <Link 
               href="/"
               className="relative group"
+              data-umami-event="Logo Click"
+              data-umami-event-location="header"
             >
               <div className="relative transition-transform duration-300 hover:scale-105">
                 <Image
@@ -204,6 +206,9 @@ export function Header() {
                       ? "text-amber-400"
                       : "text-gray-300 hover:text-white"
                   } ${isLanguageChanging ? 'transition-opacity duration-100' : ''}`}
+                  data-umami-event="Navigation Click"
+                  data-umami-event-section={item.sectionId}
+                  data-umami-event-location="header"
                   style={{
                     animation: isMounted && isVisible && !isLanguageChanging
                       ? `fadeInDown 0.5s ease-out ${index * 0.1 + 0.3}s both` 
@@ -247,6 +252,8 @@ export function Header() {
                   size="sm"
                   className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-6 py-2 text-sm font-mono font-semibold shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 transition-all duration-300 border-0 hover:scale-105"
                   onClick={() => scrollToSection('/#contact')}
+                  data-umami-event="Get Started Click"
+                  data-umami-event-location="header-desktop"
                 >
                   {t("buttons.getStarted")}
                 </Button>
@@ -258,6 +265,8 @@ export function Header() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden relative p-2 text-gray-300 hover:text-white transition-colors"
               aria-label="Toggle menu"
+              data-umami-event="Mobile Menu Toggle"
+              data-umami-event-location="header"
             >
               <div className="relative w-6 h-6">
                 <Menu
@@ -313,6 +322,9 @@ export function Header() {
                       ? "text-amber-400 bg-amber-400/10"
                       : "text-gray-300 hover:text-white hover:bg-white/5"
                   }`}
+                  data-umami-event="Navigation Click"
+                  data-umami-event-section={item.sectionId}
+                  data-umami-event-location="mobile-menu"
                   style={{
                     animation: isMobileMenuOpen
                       ? `fadeInUp 0.5s ease-out ${index * 0.1}s both`
@@ -350,6 +362,8 @@ export function Header() {
                     setIsMobileMenuOpen(false);
                     scrollToSection('/#contact');
                   }}
+                  data-umami-event="Get Started Click"
+                  data-umami-event-location="header-mobile"
                 >
                   {t("buttons.getStarted")}
                 </Button>

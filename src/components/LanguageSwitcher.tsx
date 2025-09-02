@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { Globe, Check } from 'lucide-react';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { useUmami } from '@/contexts/UmamiContext';
 
 export function LanguageSwitcher() {
   const { language, changeLanguage, languageNames, languages, isLoading } = useTranslation();
+  const { track } = useUmami();
   const [isOpen, setIsOpen] = useState(false);
 
   if (isLoading) {
@@ -22,7 +24,13 @@ export function LanguageSwitcher() {
   return (
     <div className="relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          track('Language Switcher Open', {
+            current_language: language,
+            available_languages: languages.length
+          });
+        }}
         className="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-mono text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300 border border-white/10 hover:border-white/20"
         aria-label="Change language"
       >
@@ -44,6 +52,11 @@ export function LanguageSwitcher() {
               <button
                 key={lang}
                 onClick={() => {
+                  track('Language Change', {
+                    from_language: language,
+                    to_language: lang,
+                    language_name: languageNames[lang]
+                  });
                   changeLanguage(lang);
                   setIsOpen(false);
                 }}

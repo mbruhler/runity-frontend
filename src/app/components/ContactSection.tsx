@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 import { useTranslation } from "@/contexts/LanguageContext";
+import { useUmami } from "@/contexts/UmamiContext";
 
 interface FormData {
   name: string;
@@ -19,6 +20,7 @@ interface FormData {
 
 export function ContactSection() {
   const { t } = useTranslation();
+  const { track } = useUmami();
   
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -57,8 +59,19 @@ export function ContactSection() {
     e.preventDefault();
     
     if (!validateForm()) {
+      track('Contact Form Validation Error', {
+        errors: Object.keys(formErrors),
+        error_count: Object.keys(formErrors).length
+      });
       return;
     }
+    
+    track('Contact Form Submit', {
+      has_company: formData.company.trim() !== '',
+      message_length: formData.message.length,
+      name_provided: formData.name.trim() !== '',
+      email_provided: formData.email.trim() !== ''
+    });
     
     setIsSubmitting(true);
     
@@ -68,6 +81,10 @@ export function ContactSection() {
     setIsSubmitting(false);
     setSubmitSuccess(true);
     setFormData({ name: "", email: "", company: "", message: "" });
+    
+    track('Contact Form Success', {
+      submission_successful: true
+    });
     
     setTimeout(() => {
       setSubmitSuccess(false);

@@ -96,6 +96,10 @@ export function CTASection({ variant = "default" }: CTASectionProps) {
             <Link 
               href={content.primaryButton.href}
               onClick={(e) => handleNavigation(e, content.primaryButton.href)}
+              data-umami-event="CTA Primary Button Click"
+              data-umami-event-variant={variant}
+              data-umami-event-location="cta-section"
+              data-umami-event-text={content.primaryButton.text}
             >
               <button className="bg-amber-500 hover:bg-amber-600 text-white font-mono font-semibold px-8 py-3 rounded-lg transition-colors">
                 {content.primaryButton.text}
@@ -105,6 +109,10 @@ export function CTASection({ variant = "default" }: CTASectionProps) {
             <Link 
               href={content.secondaryButton.href}
               onClick={(e) => handleNavigation(e, content.secondaryButton.href)}
+              data-umami-event="CTA Secondary Button Click"
+              data-umami-event-variant={variant}
+              data-umami-event-location="cta-section"
+              data-umami-event-text={content.secondaryButton.text}
             >
               <button className="border border-amber-500 text-amber-600 hover:bg-amber-50 font-mono font-semibold px-8 py-3 rounded-lg transition-colors">
                 {content.secondaryButton.text}

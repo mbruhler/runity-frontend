@@ -14,6 +14,8 @@ import { getBlogPost, BlogPost } from "@/lib/blog";
 import { Footer } from "@/app/components/Footer";
 import { CTASection } from "@/app/components/CTASection";
 import { useTranslation } from "@/contexts/LanguageContext";
+import { useUmami } from "@/contexts/UmamiContext";
+
 export default function BlogPostPage() {
   const params = useParams();
   const [post, setPost] = useState<BlogPost | null>(null);
@@ -22,12 +24,23 @@ export default function BlogPostPage() {
 
   const slug = params.slug as string;
   const { t, language } = useTranslation();
+  const { track } = useUmami();
+
   useEffect(() => {
     async function fetchPost() {
       try {
         const blogPost = await getBlogPost(slug, language);
         if (blogPost) {
           setPost(blogPost);
+          // Track blog post view
+          track('Blog Post View', {
+            post_title: blogPost.title,
+            post_slug: blogPost.slug,
+            post_category: blogPost.category,
+            author: blogPost.author,
+            language: language,
+            read_time: blogPost.readTime
+          });
         } else {
           setNotFound(true);
         }
@@ -42,17 +55,26 @@ export default function BlogPostPage() {
     if (slug) {
       fetchPost();
     }
-  }, [slug, language]);
+  }, [slug, language, track]);
 
   const handleShare = () => {
-    if (navigator.share && post) {
-      navigator.share({
-        title: post.title,
-        text: post.excerpt,
-        url: window.location.href,
+    if (post) {
+      const hasNativeShare = typeof navigator !== 'undefined' && 'share' in navigator;
+      track('Blog Post Share', {
+        post_title: post.title,
+        post_slug: post.slug,
+        share_method: hasNativeShare ? 'native_share' : 'clipboard'
       });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
+      
+      if (hasNativeShare) {
+        navigator.share({
+          title: post.title,
+          text: post.excerpt,
+          url: window.location.href,
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+      }
     }
   };
 
@@ -106,7 +128,13 @@ export default function BlogPostPage() {
           >
             {/* Back Button */}
             <div className="mb-8">
-              <Link href="/blog">
+              <Link 
+                href="/blog"
+                onClick={() => track('Blog Back Button Click', { 
+                  from_post: post?.slug,
+                  from_title: post?.title 
+                })}
+              >
                 <Button 
                   variant="ghost" 
                   className="font-mono text-gray-600 hover:text-amber-600 p-0"

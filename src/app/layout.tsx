@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Roboto, Roboto_Mono, Caveat } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/contexts/LanguageContext";
@@ -55,6 +56,12 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} ${robotoMono.variable} ${caveat.variable} antialiased`}
       >
+        <Script
+          defer
+          src="https://umami.brolercoaster.com/script.js"
+          data-website-id="3197ae1e-eae1-4ba7-b425-4a592671ac7f"
+          strategy="afterInteractive"
+        />
         <LanguageProvider>
           <ClientLayout>
             {children}

@@ -87,11 +87,19 @@ export function HeroSection() {
                 size="lg" 
                 className="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white px-10 py-7 text-lg font-mono font-semibold shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transition-transform duration-300 group border-0 hover:scale-105"
                 onClick={() => scrollToSection('/#contact')}
+                data-umami-event="Start AI Journey Click"
+                data-umami-event-location="hero-section"
+                data-umami-event-type="primary-cta"
               >
                 {t("buttons.startYourAIJourney")}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Link href="/projects">
+              <Link 
+                href="/projects"
+                data-umami-event="View Case Studies Click"
+                data-umami-event-location="hero-section"
+                data-umami-event-type="secondary-cta"
+              >
                 <Button 
                   size="lg" 
                   variant="outline" 

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { UmamiProvider } from '@/contexts/UmamiContext';
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
   const { language } = useTranslation();
@@ -11,5 +12,9 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
     document.documentElement.lang = language;
   }, [language]);
 
-  return <>{children}</>;
+  return (
+    <UmamiProvider>
+      {children}
+    </UmamiProvider>
+  );
 }

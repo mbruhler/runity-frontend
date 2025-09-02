@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Clock, Users, ArrowRight } from 'lucide-react';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { useUmami } from '@/contexts/UmamiContext';
 import { getProjects, type Project } from '@/lib/projects';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -13,6 +14,7 @@ import { CTASection } from '../components/CTASection';
 
 export default function ProjectsPage() {
   const { t, language } = useTranslation();
+  const { track } = useUmami();
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,9 +23,15 @@ export default function ProjectsPage() {
       const fetchedProjects = await getProjects(language);
       setProjects(fetchedProjects);
       setLoading(false);
+      
+      // Track projects page view
+      track('Projects Page View', {
+        projects_count: fetchedProjects.length,
+        language: language
+      });
     }
     fetchProjects();
-  }, [language]);
+  }, [language, track]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -82,7 +90,17 @@ export default function ProjectsPage() {
                 transition={{ duration: 0.2, delay: index * 0.1 }}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
               >
-                <Link href={`/projects/${project.slug}`} className="block">
+                <Link 
+                  href={`/projects/${project.slug}`} 
+                  className="block"
+                  onClick={() => track('Project Click', {
+                    project_title: project.title,
+                    project_slug: project.slug,
+                    client: project.client,
+                    tech_stack_count: project.techStack.length,
+                    has_stats: Object.keys(project.stats).length > 0
+                  })}
+                >
                   <div className="md:grid md:grid-cols-2 md:gap-8">
                     <div className="relative h-64 md:h-full bg-gradient-to-br from-amber-100 via-amber-50 to-orange-100">
                       <div className="absolute inset-0 flex items-center justify-center">

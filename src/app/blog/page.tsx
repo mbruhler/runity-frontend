@@ -11,6 +11,7 @@ import { getBlogPosts, BlogPost } from "@/lib/blog";
 import { CTASection } from "../components/CTASection";
 import { Footer } from "../components/Footer";
 import { useTranslation } from "@/contexts/LanguageContext";
+import { useUmami } from "@/contexts/UmamiContext";
 
 // Animation variants
 const fadeInUp = {
@@ -32,11 +33,17 @@ export default function BlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const { t, language } = useTranslation();
+  const { track } = useUmami();
   useEffect(() => {
     async function fetchPosts() {
       try {
         const blogPosts = await getBlogPosts(language);
         setPosts(blogPosts);
+        // Track blog page view
+        track('Blog Page View', { 
+          posts_count: blogPosts.length,
+          language: language
+        });
       } catch (error) {
         console.error('Error fetching blog posts:', error);
       } finally {
@@ -45,7 +52,7 @@ export default function BlogPage() {
     }
 
     fetchPosts();
-  }, [language]);
+  }, [language, track]);
 
   if (loading) {
     return (
@@ -103,7 +110,16 @@ export default function BlogPage() {
                   key={post.slug}
                   variants={fadeInUp}
                 >
-                  <Link href={`/blog/${post.slug}`} className="block">
+                  <Link 
+                    href={`/blog/${post.slug}`} 
+                    className="block"
+                    onClick={() => track('Blog Post Click', {
+                      post_title: post.title,
+                      post_slug: post.slug,
+                      post_category: post.category,
+                      author: post.author
+                    })}
+                  >
                     <Card className="hover:shadow-xl transition-all duration-300 cursor-pointer group h-full flex flex-col">
                       <CardHeader className="flex-grow">
                         <div className="flex items-center gap-2 mb-3">

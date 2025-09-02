@@ -19,6 +19,7 @@ import {
   Expand
 } from 'lucide-react';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { useUmami } from '@/contexts/UmamiContext';
 import { getProject, type Project } from '@/lib/projects';
 import { Header } from '../../components/Header';
 import { Footer } from '@/app/components/Footer';
@@ -27,6 +28,7 @@ import { CTASection } from '@/app/components/CTASection';
 export default function ProjectPage() {
   const params = useParams();
   const { t, language } = useTranslation();
+  const { track } = useUmami();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
@@ -40,12 +42,25 @@ export default function ProjectPage() {
           setNotFound(true);
         } else {
           setProject(fetchedProject);
+          // Track project view
+          track('Project Detail View', {
+            project_title: fetchedProject.title,
+            project_slug: fetchedProject.slug,
+            client: fetchedProject.client,
+            duration: fetchedProject.duration,
+            tech_stack_count: fetchedProject.techStack.length,
+            has_challenges: fetchedProject.challenges.length > 0,
+            has_solutions: fetchedProject.solutions.length > 0,
+            has_results: fetchedProject.results.length > 0,
+            has_stats: Object.keys(fetchedProject.stats).length > 0,
+            language: language
+          });
         }
       }
       setLoading(false);
     }
     fetchProject();
-  }, [params.slug, language]);
+  }, [params.slug, language, track]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -122,6 +137,10 @@ export default function ProjectPage() {
           <Link
             href="/projects"
             className="inline-flex items-center text-white/90 hover:text-white mb-6 transition-colors font-mono"
+            onClick={() => track('Project Back Button Click', {
+              from_project: project?.slug,
+              from_title: project?.title
+            })}
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             {t('projects.backToProjects') || 'Back to Projects'}
@@ -396,7 +415,13 @@ export default function ProjectPage() {
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
                   <div 
                     className="relative h-64 cursor-pointer group"
-                    onClick={() => setIsImageModalOpen(true)}
+                    onClick={() => {
+                      setIsImageModalOpen(true);
+                      track('Project Image Expand', {
+                        project_title: project.title,
+                        project_slug: project.slug
+                      });
+                    }}
                   >
                     <Image 
                       src={project.image} 
