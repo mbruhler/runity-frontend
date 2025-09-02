@@ -30,7 +30,7 @@ Podstawa naszego frameworka składa się z dwóch kluczowych klas:
 
 ```javascript
 // 🔧 BaseTool - fundament dla wszystkich narzędzi
-class BaseTool {
+abstract class BaseTool {
     async execute(input) {
         try {
             const result = await this._run(input);
@@ -45,7 +45,7 @@ class BaseTool {
 }
 
 // 🤖 BaseAgent - klasa bazowa dla agentów  
-class BaseAgent {
+abstract class BaseAgent {
     constructor(options) {
         this.options = options;
         this.tools = options.tools || [];

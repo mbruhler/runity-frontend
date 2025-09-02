@@ -30,7 +30,7 @@ The foundation of our framework consists of two key classes:
 
 ```javascript
 // 🔧 BaseTool - foundation for all tools
-class BaseTool {
+abstract class BaseTool {
     async execute(input) {
         try {
             const result = await this._run(input);
@@ -45,7 +45,7 @@ class BaseTool {
 }
 
 // 🤖 BaseAgent - base class for agents  
-class BaseAgent {
+abstract class BaseAgent {
     constructor(options) {
         this.options = options;
         this.tools = options.tools || [];
