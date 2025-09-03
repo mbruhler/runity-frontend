@@ -37,7 +37,11 @@ export async function generateBlogMetadata(slug: string): Promise<Metadata> {
     
     const title = `${String(data.title || 'Blog Post')} | Runity Blog`;
     const description = String(data.excerpt || content.substring(0, 160).replace(/[#*\n]/g, '').trim() + '...');
-    const imageUrl = String(data.image || '/api/og');
+    
+    // Create dynamic OG image URL with blog post data
+    const ogTitle = String(data.title || 'Blog Post');
+    const ogDescription = String(data.excerpt || content.substring(0, 160).replace(/[#*\n]/g, '').trim());
+    const imageUrl = data.image ? String(data.image) : `/api/og?type=blog&title=${encodeURIComponent(ogTitle)}&description=${encodeURIComponent(ogDescription)}`;
     
     return {
       title,

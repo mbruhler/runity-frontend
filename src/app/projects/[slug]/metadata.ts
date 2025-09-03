@@ -37,7 +37,11 @@ export async function generateProjectMetadata(slug: string): Promise<Metadata> {
     
     const title = `${String(data.title || 'Project')} | Runity Projects`;
     const description = String(data.description || content.substring(0, 160).replace(/[#*\n]/g, '').trim() + '...');
-    const imageUrl = String(data.image || '/api/og');
+    
+    // Create dynamic OG image URL with project data
+    const ogTitle = String(data.title || 'Project');
+    const ogDescription = String(data.description || content.substring(0, 160).replace(/[#*\n]/g, '').trim());
+    const imageUrl = data.image ? String(data.image) : `/api/og?type=project&title=${encodeURIComponent(ogTitle)}&description=${encodeURIComponent(ogDescription)}`;
     
     // Build keywords from tech stack and other data
     const techStack = Array.isArray(data.techStack) ? data.techStack.map(String) : [];
