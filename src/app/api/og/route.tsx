@@ -1,10 +1,8 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
+import { LOGO_BASE64 } from './logo-base64';
 
 export const runtime = 'edge';
-
-// Convert image to base64 at build time or fetch from public URL
-const LOGO_URL = '/logo.png';
 
 export async function GET(request: NextRequest) {
   try {
@@ -37,7 +35,6 @@ export async function GET(request: NextRequest) {
     };
 
     const colors = getColors();
-    const logoUrl = `${request.nextUrl.origin}${LOGO_URL}`;
     
     return new ImageResponse(
       (
@@ -92,7 +89,7 @@ export async function GET(request: NextRequest) {
               }}
             >
               <img
-                src={logoUrl}
+                src={LOGO_BASE64}
                 alt="Runity Logo"
                 width="300"
                 height="100"
