@@ -110,14 +110,14 @@ export async function GET(request: NextRequest) {
                 {/* Tagline */}
                 <div
                   style={{
-                    display: 'inline-flex',
+                    display: 'flex',
+                    width: 'fit-content',
                     padding: '8px 20px',
                     background: 'linear-gradient(135deg, #f59e0b 0%, #ea580c 100%)',
                     borderRadius: '999px',
                     fontSize: '18px',
                     fontWeight: '600',
                     color: 'white',
-                    alignSelf: 'flex-start',
                     letterSpacing: '0.5px',
                   }}
                 >
