@@ -156,29 +156,7 @@ export async function GET(request: NextRequest) {
             >
               {description}
             </p>
-          </div>
-          
-          {/* Footer */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '20px',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <span style={{ fontSize: '20px', color: 'white', opacity: 0.9 }}>
-              runity.pl
-            </span>
-            {type !== 'default' && (
-              <>
-                <span style={{ fontSize: '20px', color: 'white', opacity: 0.7, marginLeft: '10px', marginRight: '10px' }}>•</span>
-                <span style={{ fontSize: '20px', color: 'white', opacity: 0.9 }}>
-                  {type === 'blog' ? 'Blog Post' : 'Case Study'}
-                </span>
-              </>
-            )}
-          </div>
+          </div>          
         </div>
       ),
       {

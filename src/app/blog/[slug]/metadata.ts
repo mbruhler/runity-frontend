@@ -48,6 +48,9 @@ export async function generateBlogMetadata(slug: string): Promise<Metadata> {
       description,
       authors: [{ name: String(data.author || 'Runity Team') }],
       keywords: String(data.keywords || 'AI automation, software development, LLM, machine learning, business automation'),
+      other: {
+        'og:logo': 'https://runity.pl/logo.png',
+      },
       openGraph: {
         title,
         description,

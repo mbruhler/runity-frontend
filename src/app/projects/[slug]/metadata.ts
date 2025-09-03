@@ -59,6 +59,9 @@ export async function generateProjectMetadata(slug: string): Promise<Metadata> {
       description,
       keywords,
       authors: [{ name: 'Runity Team' }],
+      other: {
+        'og:logo': 'https://runity.pl/logo.png',
+      },
       openGraph: {
         title,
         description,

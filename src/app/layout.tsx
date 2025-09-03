@@ -36,12 +36,15 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  other: {
+    'og:logo': 'https://runity.pl/logo.png',
+  },
   openGraph: {
     title: "Runity - AI Automation & Software Solutions",
     description: "Build AI-powered automation systems that scale your business. Custom AI solutions that save time, reduce costs, and accelerate growth.",
     type: "website",
     locale: "en_US",
-    url: 'https:/pl',
+    url: 'https://runity.pl',
     siteName: "Runity",
     images: [
       {
